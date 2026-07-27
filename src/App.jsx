@@ -24,7 +24,7 @@ export default function App() {
   }
 
   if (route.page === 'service') {
-    return <ServiceComingSoonPage service={route.service} onNavigate={navigate} />
+    return <Home initialMode={route.service} onNavigate={navigate} />
   }
 
   if (route.page === 'login') {
