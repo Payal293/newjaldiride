@@ -1,6 +1,7 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import heroImage from '../assets/image/hero.webp'
-import cityImage from '../assets/image/hint.webp'
+import flightImage from '../assets/image/flight.jpg'
+import hotelImage from '../assets/image/hotelimg.jpg'
 import logoImage from '../assets/image/JALDIRIDE 2.png'
 import rideIcon from '../assets/services/ride.svg'
 import flightIcon from '../assets/services/flight1.svg'
@@ -171,13 +172,13 @@ function AppHeader({ active = 'Home', onNavigate, showSearch = true }) {
     </form>
   ) : null}
 
-  <span className="notification-icon">
-  <img src={bellIcon} alt="Notifications" />
-</span>
+  <button className="notification-icon" type="button" onClick={() => onNavigate('notifications')} aria-label="Notifications">
+  <img src={bellIcon} alt="" aria-hidden="true" />
+</button>
 
-  <div className="avatar">
-  <img src={profileImg} alt="Profile" />
-</div>
+  <button className="avatar" type="button" onClick={() => onNavigate('profile')} aria-label="Profile">
+  <img src={profileImg} alt="" aria-hidden="true" />
+</button>
 </div>
     </header>
   )
@@ -208,15 +209,15 @@ function SearchHeader({ onNavigate }) {
           ))}
         </nav>
 
-        <span className="notification-icon">
-          <img src={bellIcon} alt="Notifications" />
-        </span>
+        <button className="notification-icon" type="button" onClick={() => onNavigate('notifications')} aria-label="Notifications">
+          <img src={bellIcon} alt="" aria-hidden="true" />
+        </button>
 
-        <span className="help-icon" aria-label="Help">?</span>
+        <button className="help-icon" type="button" onClick={() => onNavigate('notifications')} aria-label="Help">?</button>
 
-        <div className="avatar">
-          <img src={profileImg} alt="Profile" />
-        </div>
+        <button className="avatar" type="button" onClick={() => onNavigate('profile')} aria-label="Profile">
+          <img src={profileImg} alt="" aria-hidden="true" />
+        </button>
       </div>
     </header>
   )
@@ -229,17 +230,17 @@ function PaymentHeader({ onNavigate }) {
 
       <nav aria-label="Payment navigation">
         <button className="is-active" type="button">Payment</button>
-        <button type="button">Support</button>
+        <button type="button" onClick={() => onNavigate('notifications')}>Support</button>
       </nav>
 
       <div className="payment-header-actions">
-        <span className="notification-icon">
-          <img src={bellIcon} alt="Notifications" />
-        </span>
-        <span className="help-icon" aria-label="Help">?</span>
-        <div className="avatar">
-          <img src={profileImg} alt="Profile" />
-        </div>
+        <button className="notification-icon" type="button" onClick={() => onNavigate('notifications')} aria-label="Notifications">
+          <img src={bellIcon} alt="" aria-hidden="true" />
+        </button>
+        <button className="help-icon" type="button" onClick={() => onNavigate('notifications')} aria-label="Help">?</button>
+        <button className="avatar" type="button" onClick={() => onNavigate('profile')} aria-label="Profile">
+          <img src={profileImg} alt="" aria-hidden="true" />
+        </button>
       </div>
     </header>
   )
@@ -251,14 +252,14 @@ const serviceContent = {
     title: 'Hotel Booking',
     description: 'Launching soon, something amazing is coming.',
     icon: hotelIcon,
-    image: heroImage,
+    image: hotelImage,
   },
   flights: {
     label: 'Flights',
     title: 'Flight Booking',
     description: 'Launching soon, something amazing is coming.',
     icon: flightIcon,
-    image: cityImage,
+    image: flightImage,
   },
 }
 
@@ -280,7 +281,7 @@ export function ServiceComingSoonPage({ service = 'hotels', onNavigate }) {
 ]
 
   return (
-    <div className="service-page">
+    <div className={`service-page is-${current.label.toLowerCase()}`}>
       <header className="service-nav">
         <BrandButton onNavigate={onNavigate} />
         <nav aria-label="Service navigation">
@@ -524,7 +525,7 @@ const shortcuts = [
           <section className="recent-card">
             <h2>
               Recent Bookings
-              <button type="button" onClick={() => onNavigate('search')}>View All</button>
+              <button type="button" onClick={() => onNavigate('bookings')}>View All</button>
             </h2>
             <div className="booking-list-mini">
               {bookings.map((booking) => (
@@ -544,7 +545,15 @@ const shortcuts = [
           <aside className="settings-card">
             <h2>Settings Shortcut</h2>
             {shortcuts.map(([label, icon]) => (
-              <button key={label} type="button">
+              <button 
+                key={label} 
+                type="button" 
+                onClick={() => {
+                  if (label === 'Payment Methods') onNavigate('profile-payments');
+                  if (label === 'Security & Privacy') onNavigate('security');
+                  if (label === 'Priority Support') onNavigate('notifications');
+                }}
+              >
                 <span>
                   <img src={icon} alt="" aria-hidden="true" />
                   {label}
@@ -555,7 +564,7 @@ const shortcuts = [
             <button className="sign-out" type="button" onClick={() => onNavigate('home')}>Sign Out</button>
           </aside>
         </div>
-        <button className="dashboard-fab" type="button" aria-label="Add new booking">
+        <button className="dashboard-fab" type="button" onClick={() => onNavigate('search')} aria-label="Add new booking">
           <img src={plusIcon} alt="" aria-hidden="true" />
         </button>
       </section>
@@ -772,6 +781,14 @@ export function BookingDetailsPage({ onNavigate }) {
 }
 
 export function PaymentPage({ onNavigate }) {
+  const [activeMethod, setActiveMethod] = useState(null)
+  const handlePaymentKeyDown = (event, method) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      setActiveMethod(method)
+    }
+  }
+
   return (
     <main className="jr-app-page payment-page">
       <PaymentHeader onNavigate={onNavigate} />
@@ -791,15 +808,44 @@ export function PaymentPage({ onNavigate }) {
             </article>
  
             <p className="payment-label">Choose Payment Method</p>
-            <div className="payment-method is-active">
+            <div 
+              className={`payment-method ${activeMethod === 'card' ? 'is-active' : ''}`}
+              onClick={() => setActiveMethod('card')}
+              onKeyDown={(event) => handlePaymentKeyDown(event, 'card')}
+              role="button"
+              tabIndex={0}
+              aria-pressed={activeMethod === 'card'}
+            >
               <span className="card-icon" aria-hidden="true"><span /></span>
               <div><h2>Credit / Debit Card</h2><p>Ending in 4242 &bull; Expires 12/26</p></div>
               <img className="selected-icon" src={paymentRightIcon} alt="" aria-hidden="true" />
-              <label>CVV<input type="password" placeholder="•••" /></label>
-              <small>Verified by Visa & Mastercard SecureCode</small>
+              {activeMethod === 'card' ? (
+                <>
+                  <label>CVV<input type="password" placeholder="•••" /></label>
+                  <small>Verified by Visa & Mastercard SecureCode</small>
+                </>
+              ) : null}
             </div>
-            <button className="payment-method" type="button"><img className="method-icon" src={paymentDigitalIcon} alt="" aria-hidden="true" /><div><h2>Digital Wallets</h2><p>Google Pay, PhonePe, Paytm</p></div><b>&rsaquo;</b></button>
-            <button className="payment-method" type="button"><img className="method-icon" src={paymentNetIcon} alt="" aria-hidden="true" /><div><h2>Net Banking</h2><p>Choose from 40+ banks</p></div><b>&rsaquo;</b></button>
+            <button 
+              className={`payment-method ${activeMethod === 'digital' ? 'is-active' : ''}`} 
+              type="button"
+              onClick={() => setActiveMethod('digital')}
+              aria-pressed={activeMethod === 'digital'}
+            >
+              <img className="method-icon" src={paymentDigitalIcon} alt="" aria-hidden="true" />
+              <div><h2>Digital Wallets</h2><p>Google Pay, PhonePe, Paytm</p></div>
+              <b>&rsaquo;</b>
+            </button>
+            <button 
+              className={`payment-method ${activeMethod === 'net' ? 'is-active' : ''}`} 
+              type="button"
+              onClick={() => setActiveMethod('net')}
+              aria-pressed={activeMethod === 'net'}
+            >
+              <img className="method-icon" src={paymentNetIcon} alt="" aria-hidden="true" />
+              <div><h2>Net Banking</h2><p>Choose from 40+ banks</p></div>
+              <b>&rsaquo;</b>
+            </button>
           </section>
  
           <aside className="payment-summary">
@@ -853,7 +899,7 @@ function ProfileLayout({ active, title, subtitle, children, onNavigate }) {
           <article>
             <h2>Need help?</h2>
             <p>Our support team is available 24/7 for you.</p>
-            <button type="button">Contact Support</button>
+            <button type="button" onClick={() => onNavigate('notifications')}>Contact Support</button>
           </article>
         </aside>
 
@@ -875,6 +921,7 @@ function ProfileLayout({ active, title, subtitle, children, onNavigate }) {
 }
 
 export function MyBookingsPage({ onNavigate }) {
+  const [activeTab, setActiveTab] = useState('upcoming')
   const trips = [
     {
       tier: 'Business Class',
@@ -902,17 +949,118 @@ export function MyBookingsPage({ onNavigate }) {
     },
   ]
 
+  const pastTrips = [
+    {
+      tier: 'Business Class',
+      tierTone: 'business',
+      tripId: '#JR-8291',
+      destination: 'To: Grand Hotel, Downtown',
+      date: 'Oct 12, 2023',
+      time: '04:15 PM',
+      location: 'Airport Terminal 2',
+      status: 'Completed',
+      icon: rideDashIcon,
+      iconTone: 'business',
+    },
+    {
+      tier: 'Premium Eco',
+      tierTone: 'premium',
+      tripId: '#JR-7934',
+      destination: 'To: Central Station',
+      date: 'Sep 28, 2023',
+      time: '08:00 AM',
+      location: 'North Suburbs, Sector 5',
+      status: 'Completed',
+      icon: successPremiumRideIcon,
+      iconTone: 'premium',
+    },
+  ]
+
+  const cancelledTrips = [
+    {
+      tier: 'Airport Transfer',
+      tierTone: 'business',
+      tripId: '#JR-7714',
+      destination: 'To: Chhatrapati Shivaji Maharaj International Airport',
+      date: 'Oct 18, 2023',
+      time: '06:45 AM',
+      location: 'Bandra Kurla Complex, Mumbai',
+      status: 'Cancelled',
+      icon: rideDashIcon,
+      iconTone: 'business',
+      cancelledOn: 'Cancelled on Oct 17, 2023',
+      refund: 'Refund processed',
+    },
+    {
+      tier: 'Premium Ride',
+      tierTone: 'premium',
+      tripId: '#JR-7462',
+      destination: 'To: Pune Business Park',
+      date: 'Oct 14, 2023',
+      time: '11:30 AM',
+      location: 'Lower Parel, Mumbai',
+      status: 'Cancelled',
+      icon: successPremiumRideIcon,
+      iconTone: 'premium',
+      cancelledOn: 'Cancelled on Oct 14, 2023',
+      refund: 'No charge applied',
+    },
+    {
+      tier: 'City Ride',
+      tierTone: 'business',
+      tripId: '#JR-7019',
+      destination: 'To: Juhu Beach Hotel',
+      date: 'Oct 05, 2023',
+      time: '07:10 PM',
+      location: 'Powai Lake Road, Mumbai',
+      status: 'Cancelled',
+      icon: bookingRideIcon,
+      iconTone: 'business',
+      cancelledOn: 'Cancelled on Oct 04, 2023',
+      refund: 'Refund processed',
+    },
+  ]
+
+  const tabs = [
+    ['upcoming', 'Upcoming Trips'],
+    ['history', 'Past History'],
+    ['cancelled', 'Cancelled'],
+  ]
+  const displayTrips = activeTab === 'upcoming' ? trips : activeTab === 'history' ? pastTrips : cancelledTrips
+
   return (
-    <main className="jr-app-page">
+    <main className="jr-app-page is-bookings">
       <AppHeader active="Bookings" onNavigate={onNavigate} showSearch={false} />
       <section className="my-bookings-shell">
         <div className="bookings-head">
-          <div><p className="eyebrow">Management Center</p><h1>My Bookings</h1><p>Manage your luxury commutes and historical travel data.</p></div>
+          <div><p className="eyebrow">Management Center</p><h1>{activeTab === 'cancelled' ? 'Cancelled Bookings' : 'My Bookings'}</h1><p>{activeTab === 'cancelled' ? 'Review cancelled trips, refund status, and rebook when plans change.' : 'Manage your luxury commutes and historical travel data.'}</p></div>
           <div><input placeholder="Search trips..." /><button type="button" onClick={() => onNavigate('search')}>+ New Booking</button></div>
         </div>
-        <nav className="booking-tabs"><button className="is-active">Upcoming Trips</button><button>Past History</button><button>Cancelled</button></nav>
+        <nav className="booking-tabs" aria-label="Booking views">
+          {tabs.map(([tab, label]) => (
+            <button key={tab} className={activeTab === tab ? 'is-active' : ''} type="button" onClick={() => setActiveTab(tab)} aria-selected={activeTab === tab}>{label}</button>
+          ))}
+        </nav>
+        {activeTab === 'cancelled' ? (
+          <section className="cancelled-bookings-panel" aria-label="Cancelled bookings">
+            <div className="cancelled-summary">
+              <article>
+                <span>{cancelledTrips.length}</span>
+                <p>Total cancelled bookings</p>
+              </article>
+              <article>
+                <span>2</span>
+                <p>Refunds processed</p>
+              </article>
+              <article>
+                <span>1</span>
+                <p>No charge applied</p>
+              </article>
+            </div>
+          </section>
+        ) : null}
         <div className="booking-list">
-          {trips.map((trip) => (
+          {displayTrips.map((trip) => (
             <article key={trip.tripId}>
               <span className={`trip-icon is-${trip.iconTone}`}>
                 <img src={trip.icon} alt="" aria-hidden="true" />
@@ -927,13 +1075,18 @@ export function MyBookingsPage({ onNavigate }) {
                   <span><img src={dashboardCalendarIcon} alt="" aria-hidden="true" />{trip.date} <b>{trip.time}</b></span>
                   <span><img src={dashboardLocationIcon} alt="" aria-hidden="true" />{trip.location}</span>
                 </p>
+                {activeTab === 'cancelled' ? <p className="cancelled-trip-note">{trip.cancelledOn} <strong>{trip.refund}</strong></p> : null}
               </div>
-              <strong className={`trip-status is-${trip.status.toLowerCase()}`}>
-                {trip.status === 'Confirmed' ? <i aria-hidden="true" /> : null}
-                {trip.status}
-              </strong>
-              <button type="button">{trip.status === 'Confirmed' ? 'Modify' : 'Cancel'}</button>
-              <button type="button" onClick={() => onNavigate('booking')}>{trip.status === 'Confirmed' ? 'Track Live' : 'Edit Route'}</button>
+              <div className="trip-actions">
+                <strong className={`trip-status is-${trip.status.toLowerCase()}`}>
+                  {trip.status === 'Confirmed' ? <i aria-hidden="true" /> : null}
+                  {trip.status}
+                </strong>
+                <div className="trip-actions-buttons">
+                  <button type="button" onClick={() => (trip.status === 'Cancelled' ? onNavigate('search') : undefined)}>{trip.status === 'Confirmed' || trip.status === 'Scheduled' ? 'Modify' : trip.status === 'Completed' ? 'Rate Trip' : 'Book Again'}</button>
+                  <button type="button" onClick={() => onNavigate('booking')}>{trip.status === 'Confirmed' ? 'Track Live' : trip.status === 'Scheduled' ? 'Edit Route' : trip.status === 'Completed' ? 'View Receipt' : 'Details'}</button>
+                </div>
+              </div>
             </article>
           ))}
         </div>
@@ -964,7 +1117,7 @@ export function ProfilePage({ onNavigate }) {
           <span className="profile-card-icon is-secure"><img src={paymentSecureIcon} alt="" aria-hidden="true" /></span>
           <h2>Security Status</h2>
           <p>Your account is protected by 2FA. Last login: 2 hours ago.</p>
-          <button className="is-secure" type="button">Manage Security <img src={paymentSecureIcon} alt="" aria-hidden="true" /></button>
+          <button className="is-secure" type="button" onClick={() => onNavigate('security')}>Manage Security <img src={paymentSecureIcon} alt="" aria-hidden="true" /></button>
         </article>
       </div>
     </ProfileLayout>
@@ -1130,7 +1283,7 @@ export function SecurityPage({ onNavigate }) {
             <h3>iPhone 15 Pro</h3>
             <p>JaldiRide App - 2 hours ago</p>
           </div>
-          <button type="button">Logout</button>
+          <button type="button" onClick={() => onNavigate('home')}>Logout</button>
         </div>
       </article>
     </ProfileLayout>
@@ -1200,14 +1353,14 @@ export function SuccessPage({ onNavigate }) {
           <button
             className="track-btn"
             type="button"
-            onClick={() => onNavigate("booking")}
+            onClick={() => onNavigate("bookings")}
           >
-            Track Journey <img src={successTrackIcon} alt="" aria-hidden="true" />
+            Booking History <img src={successTrackIcon} alt="" aria-hidden="true" />
           </button>
           <button
             className="home-btn"
             type="button"
-            onClick={() => onNavigate("home")}
+            onClick={() => onNavigate("dashboard")}
           >
             Return Home <img src={successHomeIcon} alt="" aria-hidden="true" />
           </button>

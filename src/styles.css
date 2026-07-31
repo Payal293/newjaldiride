@@ -25,11 +25,16 @@ body,
   min-height: 100%;
 }
 
+html {
+  font-size: 14px;
+}
+
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
+  font-size: 14px;
 }
 
 button,
@@ -1231,10 +1236,6 @@ transition:
   position: absolute;
   inset: 0;
 
-  background:
-    url("../assets/driver/light-streak.png") no-repeat left 55%,
-    url("../assets/driver/light-streak-right.png") no-repeat right 70%;
-  background-size: 55%, 45%;
   opacity: .55;
   pointer-events: none;
   z-index: 1;
@@ -1942,20 +1943,29 @@ cursor: pointer;
 }
 
 .qr-card {
-  width: 124px;
-  height: 124px;
-  border-radius: 16px;
+  width: 136px;
+  height: 136px;
+  border-radius: 20px;
   background: #ffffff;
-  padding: 14px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  padding: 10px;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.14),
+    inset 0 0 0 1px rgba(255, 92, 0, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.qr-code-svg {
+.qr-code-svg,
+.qr-code-image {
   width: 100%;
   height: 100%;
+}
+
+.qr-code-image {
+  display: block;
+  border-radius: 14px;
+  object-fit: cover;
 }
 
 .qr-label {
@@ -2733,7 +2743,8 @@ cursor: pointer;
   font-weight: 700;
 }
 
-.jr-header-actions > span {
+.jr-header-actions > span,
+.jr-header-actions > .notification-icon {
   width: 1.9rem;
   height: 1.9rem;
   border-radius: 999px;
@@ -2993,6 +3004,424 @@ cursor: pointer;
   letter-spacing: 0.12em;
   font-size: 0.58rem;
   font-weight: 900;
+}
+
+.service-page.is-flights {
+  background: #081d2b;
+}
+
+.service-page.is-flights .service-nav {
+  min-height: 68px;
+  padding: 0 38px;
+  background: rgba(118, 177, 216, 0.82);
+  box-shadow: none;
+  backdrop-filter: blur(10px);
+}
+
+.service-page.is-flights .service-nav .app-brand {
+  color: #10121a;
+}
+
+.service-page.is-flights .service-nav nav {
+  gap: 12px;
+}
+
+.service-page.is-flights .service-nav nav button {
+  min-height: 42px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: rgba(16, 18, 26, 0.72);
+  box-shadow: none;
+  transform: none;
+}
+
+.service-page.is-flights .service-nav nav button:hover,
+.service-page.is-flights .service-nav nav button:focus-visible {
+  color: #ff5c00;
+  background: transparent;
+  box-shadow: none;
+}
+
+.service-page.is-flights .service-nav nav button.is-active {
+  color: #ff5c00;
+  border-bottom: 2px solid #ff5c00;
+  background: transparent;
+  box-shadow: none;
+}
+
+.service-page.is-flights .book-now {
+  min-width: 120px;
+  min-height: 40px;
+  border-radius: 999px;
+  background: #ff7a1a;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.service-page.is-flights .book-now:hover,
+.service-page.is-flights .book-now:focus-visible {
+  background: #ff5c00;
+  box-shadow: 0 12px 28px rgba(255, 92, 0, 0.22);
+}
+
+.service-page.is-flights .service-hero {
+  min-height: calc(100vh - 68px);
+  padding: 124px 24px 78px;
+  place-items: start center;
+  background:
+    linear-gradient(180deg, rgba(15, 123, 184, 0.14) 0%, rgba(0, 0, 0, 0.12) 54%, rgba(0, 0, 0, 0.34) 100%),
+    var(--service-bg) center 38% / cover no-repeat;
+}
+
+.service-page.is-flights .service-hero-content {
+  width: min(100%, 1068px);
+}
+
+.service-page.is-flights .service-hero h1 {
+  max-width: 720px;
+  font-size: 62px;
+  line-height: 68px;
+  letter-spacing: 0;
+  font-weight: 900;
+}
+
+.service-page.is-flights .service-hero h1 strong {
+  color: #ff5c00;
+}
+
+.service-page.is-flights .service-hero-content > p {
+  width: min(100%, 560px);
+  margin-top: 22px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.service-page.is-flights .service-soon-card {
+  width: min(100%, 800px);
+  min-height: 212px;
+  margin-top: 38px;
+  padding: 18px 38px 24px;
+  border-radius: 38px;
+  background: rgba(238, 247, 248, 0.76);
+  box-shadow: 0 24px 56px rgba(17, 31, 39, 0.22);
+  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+}
+
+.service-page.is-flights .service-tabs {
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.service-page.is-flights .service-tabs button {
+  min-width: 82px;
+  min-height: 34px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
+  color: #2e3138;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.service-page.is-flights .service-tabs button:hover,
+.service-page.is-flights .service-tabs button:focus-visible {
+  color: #ff5c00;
+  background: rgba(255, 255, 255, 0.52);
+  box-shadow: 0 8px 18px rgba(24, 36, 48, 0.1);
+}
+
+.service-page.is-flights .service-tabs button.is-active {
+  color: #ff5c00;
+  background: #ffffff;
+  box-shadow: 0 10px 22px rgba(24, 36, 48, 0.15);
+}
+
+.service-page.is-flights .service-tabs button:hover img,
+.service-page.is-flights .service-tabs button:focus-visible img,
+.service-page.is-flights .service-tabs button.is-active img {
+  filter: brightness(0) saturate(100%) invert(47%) sepia(94%) saturate(2776%) hue-rotate(1deg) brightness(104%) contrast(105%);
+}
+
+.service-page.is-flights .service-soon-body {
+  padding-top: 16px;
+}
+
+.service-page.is-flights .service-soon-body > img {
+  width: 42px;
+  height: 42px;
+  padding: 9px;
+  border-radius: 50%;
+  background: rgba(255, 122, 0, 0.12);
+  filter: brightness(0) saturate(100%) invert(47%) sepia(94%) saturate(2776%) hue-rotate(1deg) brightness(104%) contrast(105%);
+}
+
+.service-page.is-flights .service-soon-body h2 {
+  margin-top: 14px;
+  color: #2d166f;
+  font-size: 22px;
+  line-height: 28px;
+}
+
+.service-page.is-flights .service-soon-body p {
+  margin-top: 6px;
+  color: #4f4b57;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.service-page.is-flights .service-soon-body span {
+  margin-top: 16px;
+  padding: 7px 16px;
+  background: rgba(255, 122, 0, 0.08);
+  color: #ff5c00;
+}
+
+.service-page.is-flights .service-soon-body span b {
+  width: 5px;
+  height: 5px;
+  margin-right: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  background: currentColor;
+  color: transparent;
+  vertical-align: middle;
+}
+
+.service-page.is-hotels {
+  background: #07111f;
+}
+
+.service-page.is-hotels .service-nav {
+  min-height: 66px;
+  padding: 0 38px;
+  background: rgba(78, 104, 165, 0.9);
+  box-shadow: none;
+  backdrop-filter: blur(10px);
+}
+
+.service-page.is-hotels .service-nav .app-brand {
+  color: #10121a;
+}
+
+.service-page.is-hotels .service-nav nav {
+  gap: 12px;
+}
+
+.service-page.is-hotels .service-nav nav button {
+  min-height: 42px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: rgba(16, 18, 26, 0.72);
+  box-shadow: none;
+  transform: none;
+}
+
+.service-page.is-hotels .service-nav nav button:hover,
+.service-page.is-hotels .service-nav nav button:focus-visible {
+  color: #ff5c00;
+  background: transparent;
+  box-shadow: none;
+}
+
+.service-page.is-hotels .service-nav nav button.is-active {
+  color: #ff5c00;
+  border-bottom: 2px solid #ff5c00;
+  background: transparent;
+  box-shadow: none;
+}
+
+.service-page.is-hotels .book-now {
+  min-width: 120px;
+  min-height: 40px;
+  border-radius: 999px;
+  background: #ff7a1a;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.service-page.is-hotels .book-now:hover,
+.service-page.is-hotels .book-now:focus-visible {
+  background: #ff5c00;
+  box-shadow: 0 12px 28px rgba(255, 92, 0, 0.22);
+}
+
+.service-page.is-hotels .service-hero {
+  min-height: calc(100vh - 66px);
+  padding: 132px 24px 78px;
+  place-items: start center;
+  background:
+    linear-gradient(180deg, rgba(16, 75, 143, 0.1) 0%, rgba(0, 0, 0, 0.04) 46%, rgba(0, 0, 0, 0.34) 100%),
+    var(--service-bg) center center / cover no-repeat;
+}
+
+.service-page.is-hotels .service-hero-content {
+  width: min(100%, 1070px);
+}
+
+.service-page.is-hotels .service-hero h1 {
+  max-width: 720px;
+  font-size: 62px;
+  line-height: 68px;
+  letter-spacing: 0;
+  font-weight: 900;
+}
+
+.service-page.is-hotels .service-hero h1 strong {
+  color: #ff5c00;
+}
+
+.service-page.is-hotels .service-hero-content > p {
+  width: min(100%, 560px);
+  margin-top: 22px;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.service-page.is-hotels .service-soon-card {
+  width: min(100%, 800px);
+  min-height: 212px;
+  margin-top: 38px;
+  padding: 18px 38px 24px;
+  border-radius: 38px;
+  background: rgba(231, 227, 208, 0.62);
+  box-shadow: 0 24px 56px rgba(12, 18, 30, 0.28);
+  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+}
+
+.service-page.is-hotels .service-tabs {
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.service-page.is-hotels .service-tabs button {
+  min-width: 82px;
+  min-height: 34px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
+  color: #24242b;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.service-page.is-hotels .service-tabs button:hover,
+.service-page.is-hotels .service-tabs button:focus-visible {
+  color: #ff5c00;
+  background: rgba(255, 255, 255, 0.52);
+  box-shadow: 0 8px 18px rgba(24, 36, 48, 0.12);
+}
+
+.service-page.is-hotels .service-tabs button.is-active {
+  color: #ff5c00;
+  background: #ffffff;
+  box-shadow: 0 10px 22px rgba(24, 36, 48, 0.16);
+}
+
+.service-page.is-hotels .service-tabs button:hover img,
+.service-page.is-hotels .service-tabs button:focus-visible img,
+.service-page.is-hotels .service-tabs button.is-active img {
+  filter: brightness(0) saturate(100%) invert(47%) sepia(94%) saturate(2776%) hue-rotate(1deg) brightness(104%) contrast(105%);
+}
+
+.service-page.is-hotels .service-soon-body {
+  padding-top: 16px;
+}
+
+.service-page.is-hotels .service-soon-body > img {
+  width: 42px;
+  height: 42px;
+  padding: 9px;
+  border-radius: 50%;
+  background: transparent;
+  filter: brightness(0) saturate(100%) invert(47%) sepia(94%) saturate(2776%) hue-rotate(1deg) brightness(104%) contrast(105%);
+}
+
+.service-page.is-hotels .service-soon-body h2 {
+  margin-top: 14px;
+  color: #2d166f;
+  font-size: 22px;
+  line-height: 28px;
+}
+
+.service-page.is-hotels .service-soon-body p {
+  margin-top: 6px;
+  color: #3f3d46;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.service-page.is-hotels .service-soon-body span {
+  margin-top: 16px;
+  padding: 7px 16px;
+  background: rgba(255, 122, 0, 0.08);
+  color: #ff5c00;
+}
+
+.service-page.is-hotels .service-soon-body span b {
+  width: 5px;
+  height: 5px;
+  margin-right: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  background: currentColor;
+  color: transparent;
+  vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+  .service-page.is-flights .service-nav,
+  .service-page.is-hotels .service-nav {
+    padding: 12px 18px;
+    gap: 12px;
+  }
+
+  .service-page.is-flights .service-nav nav,
+  .service-page.is-hotels .service-nav nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .service-page.is-flights .service-hero,
+  .service-page.is-hotels .service-hero {
+    padding: 72px 18px 48px;
+    background-position: center top;
+  }
+
+  .service-page.is-flights .service-hero h1,
+  .service-page.is-hotels .service-hero h1 {
+    font-size: 42px;
+    line-height: 48px;
+  }
+
+  .service-page.is-flights .service-soon-card,
+  .service-page.is-hotels .service-soon-card {
+    margin-top: 30px;
+    padding: 16px 18px 22px;
+    border-radius: 28px;
+  }
+
+  .service-page.is-flights .service-tabs,
+  .service-page.is-hotels .service-tabs {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .service-page.is-flights .service-tabs button,
+  .service-page.is-hotels .service-tabs button {
+    min-width: auto;
+    padding: 0 10px;
+  }
 }
 
 .login-page {
@@ -6652,17 +7081,23 @@ transform:translateY(-15px) rotate(0deg);
 }
 
 .method-card-foot button {
-  width: 18px;
-  height: 18px;
+  width: 32px;
+  height: 32px;
   padding: 0;
-  display: grid;
-  place-items: center;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: transparent;
+  box-shadow: none;
+  transform: none;
 }
 
 .method-card-foot button img {
   width: 16px;
   height: 16px;
+  display: block;
+  flex: none;
 }
 
 .method-card-foot button.is-muted img {
@@ -6671,7 +7106,9 @@ transform:translateY(-15px) rotate(0deg);
 
 .method-card-foot .set-primary-btn {
   width: auto;
-  height: auto;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 999px;
   color: #ff5c00;
   font-size: 10px;
   line-height: 14px;
@@ -7572,3 +8009,2055 @@ transform:translateY(-15px) rotate(0deg);
     font-size: 30px;
   }
 }
+
+/* Interaction state pass */
+:root {
+  --interactive-ring: 0 0 0 3px rgba(255, 92, 0, 0.22);
+  --interactive-ring-purple: 0 0 0 3px rgba(59, 29, 121, 0.18);
+  --interactive-hover-shadow: 0 18px 38px rgba(255, 92, 0, 0.18);
+  --interactive-selected-shadow: 0 18px 42px rgba(255, 92, 0, 0.20);
+  --interactive-purple-shadow: 0 18px 38px rgba(59, 29, 121, 0.18);
+}
+
+a,
+button,
+.notification-icon,
+.help-icon,
+.avatar,
+.preference-row span,
+.toggle {
+  -webkit-tap-highlight-color: rgba(255, 92, 0, 0.18);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 0;
+  box-shadow: var(--interactive-ring);
+}
+
+.nav-links a {
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible,
+.nav-links a:active,
+.nav-links a.is-active {
+  background: rgba(255, 92, 0, 0.11);
+}
+
+.nav-links a:active,
+.footer-link-col a:active,
+.login-footer-links a:active,
+.terms-line a:active,
+.create-line button:active {
+  box-shadow: var(--interactive-ring);
+}
+
+.book-now,
+.search-button,
+.driver-cta,
+.coming-notify-form button,
+.store-btn,
+.login-form-panel form > button,
+.social-row button,
+.journey-actions .track-btn,
+.journey-actions .phone-btn,
+.offer-card button,
+.recent-card h2 button,
+.settings-card button,
+.dashboard-fab,
+.ride-action,
+.promo-form button,
+.payment-cta,
+.payment-total button,
+.bookings-head button,
+.booking-list button,
+.load-history,
+.profile-sidebar article button,
+.profile-actions button,
+.profile-info-cards button,
+.payment-methods-title-row button,
+.method-card-foot button,
+.add-method-card,
+.digital-wallets article > button,
+.linked-bank-card article > button,
+.preference-list > button,
+.security-password-card button,
+.login-device-row button,
+.success-actions button,
+.copy-booking-btn {
+  transition:
+    background-color .18s ease,
+    border-color .18s ease,
+    color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease,
+    filter .18s ease;
+}
+
+.book-now:hover,
+.book-now:focus-visible,
+.search-button:hover,
+.search-button:focus-visible,
+.driver-cta:hover,
+.driver-cta:focus-visible,
+.coming-notify-form button:hover,
+.coming-notify-form button:focus-visible,
+.login-form-panel form > button:hover,
+.login-form-panel form > button:focus-visible,
+.journey-actions .track-btn:hover,
+.journey-actions .track-btn:focus-visible,
+.ride-action.is-orange:hover,
+.ride-action.is-orange:focus-visible,
+.payment-cta:hover,
+.payment-cta:focus-visible,
+.payment-total button:hover,
+.payment-total button:focus-visible,
+.profile-actions button:first-child:hover,
+.profile-actions button:first-child:focus-visible,
+.preference-list > button:hover,
+.preference-list > button:focus-visible,
+.security-password-card button:hover,
+.security-password-card button:focus-visible,
+.success-actions .track-btn:hover,
+.success-actions .track-btn:focus-visible {
+  transform: translateY(-2px);
+  filter: saturate(1.06) brightness(1.02);
+  box-shadow: var(--interactive-hover-shadow);
+}
+
+.book-now:active,
+.search-button:active,
+.driver-cta:active,
+.coming-notify-form button:active,
+.login-form-panel form > button:active,
+.journey-actions .track-btn:active,
+.ride-action:active,
+.payment-cta:active,
+.payment-total button:active,
+.profile-actions button:first-child:active,
+.preference-list > button:active,
+.security-password-card button:active,
+.success-actions .track-btn:active {
+  transform: translateY(0);
+  box-shadow: var(--interactive-selected-shadow), var(--interactive-ring);
+}
+
+.mode-pill {
+  border: 1px solid transparent;
+}
+
+.mode-pill:hover,
+.mode-pill:focus-visible,
+.mode-pill:active,
+.mode-pill.is-active {
+  border-color: rgba(255, 255, 255, 0.72);
+  box-shadow: var(--interactive-selected-shadow);
+}
+
+.mode-pill:hover .mode-icon,
+.mode-pill:focus-visible .mode-icon,
+.mode-pill:active .mode-icon {
+  filter: brightness(0) invert(1);
+  opacity: 1;
+}
+
+.field-control,
+.header-search,
+.input-wrapper input,
+.coming-notify-form input,
+.promo-form,
+.bookings-head input,
+.profile-form input,
+.security-form input,
+.payment-method input {
+  transition:
+    background-color .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+.field:hover .field-control,
+.field:focus-within .field-control,
+.field:active .field-control,
+.header-search:hover,
+.header-search:focus-within,
+.promo-form:hover,
+.promo-form:focus-within {
+  border-color: rgba(255, 92, 0, 0.42);
+  background: #ffffff;
+  box-shadow: var(--interactive-ring), 0 10px 24px rgba(255, 92, 0, 0.08);
+}
+
+.field:active .field-control,
+.header-search:active,
+.promo-form:active {
+  transform: translateY(-1px);
+}
+
+.header-search:focus-within {
+  border-color: #ECE7F0;
+  background: #F8F5FA;
+  box-shadow: none;
+}
+
+.header-search input:focus-visible {
+  box-shadow: none;
+}
+
+.coming-notify-form input:hover,
+.coming-notify-form input:focus-visible,
+.bookings-head input:hover,
+.bookings-head input:focus-visible,
+.profile-form input:hover,
+.profile-form input:focus-visible,
+.security-form input:hover,
+.security-form input:focus-visible,
+.input-wrapper input:hover,
+.input-wrapper input:focus-visible,
+.payment-method input:hover,
+.payment-method input:focus-visible {
+  border-color: rgba(255, 92, 0, 0.40);
+  background: #ffffff;
+  box-shadow: var(--interactive-ring);
+}
+
+.jr-header nav button,
+.service-nav nav button,
+.search-header nav button,
+.payment-header nav button,
+.profile-sidebar nav button,
+.service-tabs button,
+.booking-tabs button,
+.filter-row button {
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition:
+    background-color .18s ease,
+    border-color .18s ease,
+    color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+.jr-header nav button,
+.service-nav nav button,
+.search-header nav button,
+.payment-header nav button {
+  min-height: 38px;
+  padding: 0 14px;
+}
+
+.jr-header nav button:hover,
+.jr-header nav button:focus-visible,
+.jr-header nav button:active,
+.jr-header nav button.is-active,
+.service-nav nav button:hover,
+.service-nav nav button:focus-visible,
+.service-nav nav button:active,
+.service-nav nav button.is-active,
+.search-header nav button:hover,
+.search-header nav button:focus-visible,
+.search-header nav button:active,
+.search-header nav button.is-active,
+.payment-header nav button:hover,
+.payment-header nav button:focus-visible,
+.payment-header nav button:active,
+.payment-header nav button.is-active,
+.profile-sidebar nav button:hover,
+.profile-sidebar nav button:focus-visible,
+.profile-sidebar nav button:active,
+.profile-sidebar nav button.is-active,
+.booking-tabs button:hover,
+.booking-tabs button:focus-visible,
+.booking-tabs button:active,
+.booking-tabs .is-active {
+  color: #3b1d79;
+  background: rgba(59, 29, 121, 0.09);
+  border-color: rgba(59, 29, 121, 0.16);
+  box-shadow: var(--interactive-ring-purple);
+}
+
+.service-tabs button:hover,
+.service-tabs button:focus-visible,
+.service-tabs button:active,
+.service-tabs button.is-active,
+.filter-row button:hover,
+.filter-row button:focus-visible,
+.filter-row button:active,
+.filter-row button.is-active {
+  color: #ffffff;
+  background: #3b1d79;
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: var(--interactive-purple-shadow);
+}
+
+.service-tabs button:hover img,
+.service-tabs button:focus-visible img,
+.service-tabs button:active img,
+.service-tabs button.is-active img {
+  filter: brightness(0) invert(1);
+}
+
+.notification-icon,
+.help-icon,
+.avatar {
+  transition:
+    background-color .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+.notification-icon:hover,
+.notification-icon:focus-visible,
+.notification-icon:active,
+.help-icon:hover,
+.help-icon:focus-visible,
+.help-icon:active,
+.avatar:hover,
+.avatar:focus-visible,
+.avatar:active {
+  background: #fff4e9;
+  border-color: rgba(255, 92, 0, 0.42);
+  box-shadow: var(--interactive-ring);
+  transform: translateY(-1px);
+}
+
+.service-shortcuts button,
+.ride-card,
+.booking-list article,
+.payment-method,
+.method-card,
+.profile-panel.is-payment-methods .add-method-card,
+.digital-wallets article,
+.linked-bank-card article,
+.profile-info-cards article,
+.preference-row,
+.login-device-row,
+.why-card,
+.platform-card,
+.process-card,
+.driver-feature-card,
+.driver-stat-card,
+.coming-card,
+.promo-image-card,
+.promo-safety-card,
+.vehicle-card,
+.route-card {
+  border: 1px solid rgba(59, 29, 121, 0.06);
+  transition:
+    background-color .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+.service-shortcuts button:hover,
+.service-shortcuts button:focus-visible,
+.service-shortcuts button:active,
+.ride-card:hover,
+.ride-card:focus-within,
+.ride-card:active,
+.booking-list article:hover,
+.booking-list article:focus-within,
+.booking-list article:active,
+.payment-method.is-active,
+.method-card.is-primary,
+.profile-panel.is-payment-methods .add-method-card:hover,
+.profile-panel.is-payment-methods .add-method-card:focus-visible,
+.profile-panel.is-payment-methods .add-method-card:active,
+.digital-wallets article:hover,
+.digital-wallets article:focus-within,
+.digital-wallets article:active,
+.linked-bank-card article:hover,
+.linked-bank-card article:focus-within,
+.linked-bank-card article:active,
+.profile-info-cards article:hover,
+.profile-info-cards article:focus-within,
+.profile-info-cards article:active,
+.preference-row:hover,
+.preference-row:active,
+.login-device-row:hover,
+.login-device-row:focus-within,
+.login-device-row:active,
+.why-card:hover,
+.platform-card:hover,
+.process-card:hover,
+.driver-feature-card:hover,
+.driver-stat-card:hover,
+.coming-card:hover,
+.promo-image-card:hover,
+.promo-safety-card:hover,
+.vehicle-card:hover,
+.route-card:hover {
+  border-color: rgba(255, 92, 0, 0.34);
+  background-color: #fffaf6;
+  box-shadow: var(--interactive-selected-shadow);
+  transform: translateY(-2px);
+}
+
+.service-shortcuts button:active,
+.ride-card:active,
+.booking-list article:active,
+.payment-method:active,
+.method-card:active,
+.profile-panel.is-payment-methods .add-method-card:active,
+.digital-wallets article:active,
+.linked-bank-card article:active,
+.profile-info-cards article:active,
+.preference-row:active,
+.login-device-row:active,
+.vehicle-card:active,
+.route-card:active {
+  box-shadow: var(--interactive-selected-shadow), var(--interactive-ring);
+}
+
+.payment-method.is-active,
+.method-card.is-primary {
+  background: #fff4e9;
+  border-color: rgba(255, 92, 0, 0.42);
+}
+
+.journey-actions .phone-btn:hover,
+.journey-actions .phone-btn:focus-visible,
+.journey-actions .phone-btn:active,
+.offer-card button:hover,
+.offer-card button:focus-visible,
+.offer-card button:active,
+.recent-card h2 button:hover,
+.recent-card h2 button:focus-visible,
+.recent-card h2 button:active,
+.settings-card button:hover,
+.settings-card button:focus-visible,
+.settings-card button:active,
+.dashboard-fab:hover,
+.dashboard-fab:focus-visible,
+.dashboard-fab:active,
+.ride-action.is-purple:hover,
+.ride-action.is-purple:focus-visible,
+.ride-action.is-purple:active,
+.promo-form button:hover,
+.promo-form button:focus-visible,
+.promo-form button:active,
+.bookings-head button:hover,
+.bookings-head button:focus-visible,
+.bookings-head button:active,
+.booking-list button:hover,
+.booking-list button:focus-visible,
+.booking-list button:active,
+.load-history:hover,
+.load-history:focus-visible,
+.load-history:active,
+.profile-sidebar article button:hover,
+.profile-sidebar article button:focus-visible,
+.profile-sidebar article button:active,
+.digital-wallets article > button:hover,
+.digital-wallets article > button:focus-visible,
+.digital-wallets article > button:active,
+.linked-bank-card article > button:hover,
+.linked-bank-card article > button:focus-visible,
+.linked-bank-card article > button:active,
+.login-device-row button:hover,
+.login-device-row button:focus-visible,
+.login-device-row button:active {
+  transform: translateY(-1px);
+  box-shadow: var(--interactive-purple-shadow), var(--interactive-ring-purple);
+}
+
+.social-row button:hover,
+.social-row button:focus-visible,
+.social-row button:active,
+.store-btn:hover,
+.store-btn:focus-visible,
+.store-btn:active,
+.profile-actions button:last-child:hover,
+.profile-actions button:last-child:focus-visible,
+.profile-actions button:last-child:active,
+.ride-action.is-outline:hover,
+.ride-action.is-outline:focus-visible,
+.ride-action.is-outline:active,
+.ride-action.is-muted:hover,
+.ride-action.is-muted:focus-visible,
+.ride-action.is-muted:active {
+  border-color: rgba(255, 92, 0, 0.38);
+  background: #fff4e9;
+  color: #ff5c00;
+  transform: translateY(-1px);
+  box-shadow: var(--interactive-ring);
+}
+
+.payment-methods-title-row button:hover,
+.payment-methods-title-row button:focus-visible,
+.payment-methods-title-row button:active,
+.profile-info-cards button:hover,
+.profile-info-cards button:focus-visible,
+.profile-info-cards button:active,
+.method-card-foot button:hover,
+.method-card-foot button:focus-visible,
+.method-card-foot button:active,
+.create-line button:hover,
+.create-line button:focus-visible,
+.create-line button:active {
+  padding-inline: 10px;
+  border-radius: 999px;
+  background: rgba(255, 92, 0, 0.11);
+  box-shadow: var(--interactive-ring);
+}
+
+.footer-link-col a,
+.login-footer-links a,
+.terms-line a {
+  border-radius: 999px;
+  transition: background-color .18s ease, color .18s ease, box-shadow .18s ease;
+}
+
+.footer-link-col a:hover,
+.footer-link-col a:focus-visible,
+.footer-link-col a:active,
+.login-footer-links a:hover,
+.login-footer-links a:focus-visible,
+.login-footer-links a:active,
+.terms-line a:hover,
+.terms-line a:focus-visible,
+.terms-line a:active {
+  background: rgba(255, 92, 0, 0.10);
+  color: #ff5c00;
+  box-shadow: var(--interactive-ring);
+}
+
+.footer-socials a:hover,
+.footer-socials a:focus-visible,
+.footer-socials a:active,
+.copy-booking-btn:hover,
+.copy-booking-btn:focus-visible,
+.copy-booking-btn:active {
+  background: #fff4e9;
+  border-color: rgba(255, 92, 0, 0.38);
+  box-shadow: var(--interactive-ring);
+  transform: translateY(-1px);
+}
+
+.preference-row span,
+.toggle {
+  cursor: pointer;
+}
+
+.preference-row:hover span,
+.preference-row:active span,
+.toggle:hover,
+.toggle:active {
+  box-shadow: var(--interactive-ring);
+}
+
+.mode-row .mode-pill {
+  cursor: pointer;
+  color: #4b4851;
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(217, 214, 227, 0.88);
+}
+
+.mode-row .mode-pill .mode-icon {
+  filter: brightness(0) saturate(100%) invert(31%) sepia(9%) saturate(484%) hue-rotate(222deg) brightness(88%) contrast(88%);
+  opacity: 1;
+}
+
+.mode-row .mode-pill:hover,
+.mode-row .mode-pill:focus-visible,
+.mode-row .mode-pill:active,
+.mode-row .mode-pill.is-active {
+  color: #ffffff;
+  background: linear-gradient(180deg, #ff7a00 0%, #ff5c00 100%);
+  border-color: rgba(255, 255, 255, 0.72);
+  box-shadow: var(--interactive-selected-shadow);
+}
+
+.mode-row .mode-pill:hover .mode-icon,
+.mode-row .mode-pill:focus-visible .mode-icon,
+.mode-row .mode-pill:active .mode-icon,
+.mode-row .mode-pill.is-active .mode-icon {
+  filter: brightness(0) invert(1);
+}
+
+.success-actions .home-btn {
+  width: auto;
+  min-width: 148px;
+  height: 50px;
+  padding: 0 22px;
+  gap: 8px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.34);
+  border: 1px solid #c9bed4;
+  color: #2f2938;
+  border-radius: 999px;
+  box-shadow: none;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.success-actions .home-btn img {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+.jr-header nav button {
+  min-height: 38px;
+  padding: 0 4px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: #4f485b;
+  box-shadow: none;
+  transform: none;
+  transition: color .18s ease, border-color .18s ease;
+}
+
+.jr-header nav button:hover,
+.jr-header nav button:focus-visible,
+.jr-header nav button:active {
+  color: #3b1d79;
+  background: transparent;
+  border-color: rgba(59, 29, 121, 0.28);
+  box-shadow: none;
+  transform: none;
+}
+
+.jr-header nav button.is-active {
+  color: #3b1d79;
+  background: transparent;
+  border-color: #3b1d79;
+  box-shadow: none;
+  transform: none;
+}
+
+.profile-sidebar nav button {
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+  transition: background-color .18s ease, color .18s ease;
+}
+
+.profile-sidebar nav button:hover,
+.profile-sidebar nav button:focus-visible,
+.profile-sidebar nav button:active {
+  color: #3b1d79;
+  background: #f6f1fa;
+  box-shadow: none;
+  transform: none;
+}
+
+.profile-sidebar nav button.is-active {
+  color: #3b1d79;
+  background: #eee6f4;
+  box-shadow: inset 4px 0 0 #3b1d79;
+  transform: none;
+}
+
+.preference-list > button {
+  margin-top: 28px;
+}
+
+.preference-row,
+.preference-row:hover,
+.preference-row:active {
+  transform: none;
+  box-shadow: none;
+}
+
+.preference-row:hover,
+.preference-row:active {
+  border-color: rgba(255, 92, 0, 0.16);
+  background: rgba(255, 92, 0, 0.035);
+}
+
+.preference-row span,
+.preference-row:hover span,
+.preference-row:active span {
+  box-shadow: none;
+}
+
+.login-activity {
+  display: grid;
+  gap: 14px;
+}
+
+.login-device-row {
+  min-height: 84px;
+  padding: 18px 22px;
+  border: 1px solid rgba(59, 29, 121, 0.08);
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: none;
+  transform: none;
+}
+
+.login-device-row:last-child {
+  border-bottom: 1px solid rgba(59, 29, 121, 0.08);
+  padding-bottom: 18px;
+}
+
+.login-device-row:hover,
+.login-device-row:focus-within,
+.login-device-row:active {
+  border-color: rgba(255, 92, 0, 0.14);
+  background: rgba(255, 92, 0, 0.028);
+  box-shadow: none;
+  transform: none;
+}
+
+.profile-shell {
+  gap: 28px;
+}
+
+.profile-panel {
+  overflow: hidden;
+}
+
+.profile-form {
+  gap: 28px 26px;
+}
+
+.profile-info-cards {
+  margin-top: 32px;
+  gap: 28px;
+}
+
+.profile-actions {
+  margin-top: 36px;
+}
+
+.profile-panel.is-payment-methods .saved-cards {
+  gap: 20px;
+}
+
+.payment-methods-grid {
+  margin-top: 30px;
+  gap: 28px;
+}
+
+.digital-wallets {
+  gap: 18px;
+}
+
+.preference-list h2 {
+  margin-top: 2.15rem;
+  padding-top: 1.35rem;
+}
+
+.preference-list > p {
+  margin-bottom: 18px;
+}
+
+.preference-row {
+  margin-top: 10px;
+  border-radius: 16px;
+}
+
+.security-form {
+  display: grid;
+  gap: 28px;
+}
+
+.security-password-card,
+.security-form article.two-factor-card,
+.login-activity,
+.profile-info-cards article,
+.method-card,
+.profile-panel.is-payment-methods .add-method-card,
+.digital-wallets article,
+.linked-bank-card article,
+.profile-panel.is-payment-methods .security-strip {
+  border-color: rgba(255, 92, 0, 0.08);
+  transition:
+    background-color .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+.security-password-card:hover,
+.security-form article.two-factor-card:hover,
+.login-activity:hover,
+.profile-info-cards article:hover,
+.profile-info-cards article:focus-within,
+.method-card:hover,
+.method-card:focus-within,
+.profile-panel.is-payment-methods .add-method-card:hover,
+.profile-panel.is-payment-methods .add-method-card:focus-visible,
+.digital-wallets article:hover,
+.digital-wallets article:focus-within,
+.linked-bank-card article:hover,
+.linked-bank-card article:focus-within,
+.profile-panel.is-payment-methods .security-strip:hover {
+  border-color: rgba(255, 92, 0, 0.18);
+  background-color: #fffdfb;
+  box-shadow: 0 12px 28px rgba(57, 43, 32, 0.07);
+  transform: translateY(-1px);
+}
+
+.security-password-card:active,
+.security-form article.two-factor-card:active,
+.profile-info-cards article:active,
+.method-card:active,
+.profile-panel.is-payment-methods .add-method-card:active,
+.digital-wallets article:active,
+.linked-bank-card article:active {
+  border-color: rgba(255, 92, 0, 0.22);
+  box-shadow: 0 8px 20px rgba(57, 43, 32, 0.06);
+  transform: none;
+}
+
+.profile-form input:hover,
+.profile-form input:focus-visible,
+.security-form input:hover,
+.security-form input:focus-visible {
+  border-color: rgba(255, 92, 0, 0.28);
+  background: #fffdfb;
+  box-shadow: 0 0 0 3px rgba(255, 92, 0, 0.10);
+}
+
+.profile-actions button:hover,
+.profile-actions button:focus-visible,
+.preference-list > button:hover,
+.preference-list > button:focus-visible,
+.security-password-card button:hover,
+.security-password-card button:focus-visible {
+  box-shadow: 0 12px 24px rgba(255, 92, 0, 0.16);
+}
+
+.profile-actions button:last-child:hover,
+.profile-actions button:last-child:focus-visible {
+  border-color: rgba(255, 92, 0, 0.24);
+  background: #fff7f1;
+  color: #ff5c00;
+  box-shadow: 0 0 0 3px rgba(255, 92, 0, 0.08);
+}
+
+.payment-methods-title-row button:hover,
+.payment-methods-title-row button:focus-visible,
+.profile-info-cards button:hover,
+.profile-info-cards button:focus-visible,
+.method-card-foot button:hover,
+.method-card-foot button:focus-visible,
+.digital-wallets article > button:hover,
+.digital-wallets article > button:focus-visible,
+.linked-bank-card article > button:hover,
+.linked-bank-card article > button:focus-visible,
+.login-device-row button:hover,
+.login-device-row button:focus-visible {
+  background: rgba(255, 92, 0, 0.08);
+  box-shadow: 0 0 0 3px rgba(255, 92, 0, 0.08);
+  color: #ff5c00;
+  transform: none;
+}
+
+.profile-sidebar article button:hover,
+.profile-sidebar article button:focus-visible {
+  background: #efe7ff;
+  box-shadow: 0 10px 22px rgba(28, 17, 47, 0.14);
+  transform: none;
+}
+
+.profile-sidebar nav {
+  display: grid;
+  gap: 8px;
+}
+
+.profile-sidebar nav button {
+  position: relative;
+  width: 100%;
+  height: 54px;
+  min-height: 54px;
+  margin: 0;
+  padding: 0 18px;
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  align-items: center;
+  justify-items: start;
+  column-gap: 12px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  text-align: left;
+  line-height: 18px;
+  transform: none;
+}
+
+.profile-sidebar nav button::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.profile-sidebar nav button:hover,
+.profile-sidebar nav button:focus-visible,
+.profile-sidebar nav button:active {
+  border-color: rgba(255, 92, 0, 0.10);
+  background: #fff8f3;
+  color: #2f2938;
+}
+
+.profile-sidebar nav button.is-active {
+  border-color: rgba(255, 92, 0, 0.14);
+  background: #fff3eb;
+  color: #ff5c00;
+  box-shadow: none;
+}
+
+.profile-sidebar nav button.is-active::before {
+  background: #ff5c00;
+}
+
+.profile-sidebar nav button img,
+.profile-sidebar nav button .profile-menu-icon {
+  grid-column: 1;
+  justify-self: center;
+}
+
+.profile-sidebar nav button img + *,
+.profile-sidebar nav button .profile-menu-icon + * {
+  grid-column: 2;
+}
+
+.profile-form,
+.security-password-card > div > div {
+  align-items: start;
+}
+
+.profile-form label,
+.security-form label {
+  min-width: 0;
+}
+
+.profile-sidebar nav {
+  display: block;
+  gap: 0;
+}
+
+.profile-sidebar nav button {
+  width: 100%;
+  min-height: 54px;
+  height: auto;
+  margin: 0;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  color: #3f3948;
+  text-align: left;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+  box-shadow: none;
+  transform: none;
+}
+
+.profile-sidebar nav button::before {
+  content: none;
+}
+
+.profile-sidebar nav button:hover,
+.profile-sidebar nav button:focus-visible,
+.profile-sidebar nav button:active {
+  color: #3b1d79;
+  background: #f6f1fa;
+  border-color: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.profile-sidebar nav button.is-active {
+  color: #3b1d79;
+  background: #eee6f4;
+  box-shadow: inset 4px 0 0 #3b1d79;
+  transform: none;
+}
+
+.profile-sidebar nav button img,
+.profile-sidebar nav button .profile-menu-icon {
+  flex: none;
+  justify-self: auto;
+}
+
+.profile-shell {
+  gap: 24px;
+}
+
+.profile-panel {
+  overflow: visible;
+}
+
+.profile-form {
+  gap: 24px;
+}
+
+.profile-info-cards {
+  margin-top: 24px;
+  gap: 24px;
+}
+
+.profile-actions {
+  margin-top: 32px;
+}
+
+.profile-panel.is-payment-methods .saved-cards {
+  gap: 14px;
+}
+
+.payment-methods-grid {
+  margin-top: 24px;
+  gap: 24px;
+}
+
+.digital-wallets {
+  gap: 14px;
+}
+
+.preference-list h2 {
+  margin-top: 1.8rem;
+  padding-top: 1.2rem;
+}
+
+.preference-list > p {
+  margin-bottom: revert;
+}
+
+.preference-row {
+  margin-top: 0;
+}
+
+.security-form {
+  display: block;
+  gap: 0;
+}
+
+.login-activity {
+  display: block;
+  gap: 0;
+}
+
+.login-device-row {
+  min-height: 74px;
+  padding: 18px 0;
+  border: 0;
+  border-bottom: 1px solid rgba(59, 29, 121, 0.08);
+  border-radius: 0;
+  background: transparent;
+}
+
+.login-device-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.login-device-row:hover,
+.login-device-row:focus-within,
+.login-device-row:active {
+  border-color: rgba(255, 92, 0, 0.12);
+  background: rgba(255, 92, 0, 0.02);
+  box-shadow: none;
+  transform: none;
+}
+
+.driver-feature-card:hover,
+.driver-feature-card:focus-within,
+.driver-feature-card:active {
+  background: rgba(26, 30, 38, 0.86);
+  border-color: rgba(38, 255, 132, 0.35);
+  color: #ffffff;
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.45),
+    0 0 30px rgba(38, 255, 132, 0.12);
+}
+
+.driver-feature-card:hover h3,
+.driver-feature-card:focus-within h3,
+.driver-feature-card:active h3 {
+  color: #ffffff;
+}
+
+.driver-feature-card:hover p,
+.driver-feature-card:focus-within p,
+.driver-feature-card:active p {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.create-line button,
+.create-line button:hover,
+.create-line button:focus-visible,
+.create-line button:active {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.create-line button:hover,
+.create-line button:focus-visible {
+  color: #e55200;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.driver-stat-card:hover,
+.driver-stat-card:focus-within,
+.driver-stat-card:active {
+  background: rgba(24, 28, 36, 0.76);
+  border-color: rgba(32, 226, 122, 0.28);
+  color: #ffffff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 28px 60px rgba(0, 0, 0, 0.45),
+    0 0 24px rgba(32, 226, 122, 0.12);
+}
+
+.driver-stat-card:hover strong,
+.driver-stat-card:focus-within strong,
+.driver-stat-card:active strong {
+  color: #ffffff;
+}
+
+.driver-stat-card:hover small,
+.driver-stat-card:focus-within small,
+.driver-stat-card:active small {
+  color: #19cd71;
+}
+
+.settings-card button:hover,
+.settings-card button:focus-visible,
+.settings-card button:active {
+  background: transparent;
+  color: #2a2530;
+  box-shadow: none;
+  transform: none;
+}
+
+.settings-card button:hover span,
+.settings-card button:focus-visible span,
+.settings-card button:active span {
+  transform: translateX(3px);
+}
+
+.settings-card button:hover span::before,
+.settings-card button:focus-visible span::before,
+.settings-card button:active span::before {
+  background: #ff5c00;
+}
+
+.settings-card button:hover b,
+.settings-card button:focus-visible b,
+.settings-card button:active b {
+  color: #ff5c00;
+}
+
+.settings-card button span {
+  position: relative;
+  transition: transform .18s ease;
+}
+
+.settings-card button span::before {
+  content: '';
+  width: 3px;
+  height: 22px;
+  border-radius: 999px;
+  background: transparent;
+  transition: background-color .18s ease;
+}
+
+.settings-card .sign-out:hover,
+.settings-card .sign-out:focus-visible,
+.settings-card .sign-out:active {
+  background: transparent;
+  color: #e21a1a;
+  box-shadow: none;
+}
+
+.booking-tabs button,
+.booking-tabs button:hover,
+.booking-tabs button:focus-visible,
+.booking-tabs button:active,
+.booking-tabs .is-active {
+  min-height: auto;
+  padding: 1rem 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.booking-tabs button:hover,
+.booking-tabs button:focus-visible,
+.booking-tabs button:active {
+  color: #ff5c00;
+  border-bottom-color: rgba(255, 92, 0, 0.45);
+}
+
+.booking-tabs .is-active {
+  color: #3b1d79;
+  border-bottom-color: #3b1d79;
+}
+
+.payment-page .payment-method {
+  background: #ffffff;
+  border-color: rgba(203, 196, 210, 0.42);
+  box-shadow: none;
+  transform: none;
+}
+
+.payment-page .payment-method:hover,
+.payment-page .payment-method:focus-visible,
+.payment-page .payment-method:focus-within,
+.payment-page .payment-method:active {
+  background: #ffffff;
+  border-color: rgba(203, 196, 210, 0.6);
+  box-shadow: none;
+  transform: none;
+}
+
+.payment-page .payment-method.is-active,
+.payment-page .payment-method.is-active:hover,
+.payment-page .payment-method.is-active:focus-within {
+  background: #ffffff;
+  border-color: #ff7a00;
+  box-shadow: none;
+}
+
+.payment-page .payment-total {
+  background: #f8f7fa;
+  box-shadow: none;
+}
+
+.payment-page .payment-total:hover,
+.payment-page .payment-total:focus-within {
+  background: #f8f7fa;
+  box-shadow: none;
+  transform: none;
+}
+
+.payment-page .payment-total p,
+.payment-page .payment-total h2,
+.payment-security-row span {
+  color: #494551;
+}
+
+.payment-security-row span:hover {
+  color: #494551;
+  background: transparent;
+  box-shadow: none;
+}
+
+.payment-page .payment-total button:hover,
+.payment-page .payment-total button:focus-visible,
+.payment-page .payment-total button:active {
+  background: #ff7a00;
+  color: #ffffff;
+  box-shadow: 0 12px 22px rgba(255, 122, 0, 0.18);
+  transform: none;
+}
+
+.driver-feature-card,
+.driver-feature-card:hover,
+.driver-feature-card:focus-within,
+.driver-feature-card:active,
+.driver-stat-card,
+.driver-stat-card:hover,
+.driver-stat-card:focus-within,
+.driver-stat-card:active {
+  background:
+    linear-gradient(135deg, rgba(38, 48, 42, 0.58), rgba(8, 14, 15, 0.66));
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 22px 46px rgba(0, 0, 0, 0.30);
+  backdrop-filter: blur(16px) saturate(1.08);
+  -webkit-backdrop-filter: blur(16px) saturate(1.08);
+}
+
+.driver-feature-card:hover,
+.driver-feature-card:focus-within,
+.driver-feature-card:active,
+.driver-stat-card:hover,
+.driver-stat-card:focus-within,
+.driver-stat-card:active {
+  transform: translateY(-4px);
+}
+
+.driver-feature-icon-wrap,
+.driver-stat-icon-wrap {
+  background: rgba(32, 226, 122, 0.10);
+  border-color: rgba(32, 226, 122, 0.46);
+}
+
+.app-download-shell {
+  padding-bottom: 72px;
+}
+
+.login-form-panel input,
+.login-form-panel form > button,
+.social-row button {
+  border-radius: 4px;
+}
+
+.login-form-panel form > button {
+  min-height: 42px;
+}
+
+.social-row button {
+  min-height: 42px;
+  background: transparent;
+}
+
+@media (max-width: 768px) {
+  .app-download-shell {
+    padding-bottom: 52px;
+  }
+}
+
+.app-download-card .store-btn:hover,
+.app-download-card .store-btn:focus-visible,
+.app-download-card .store-btn:active {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.85);
+  color: #ffffff;
+}
+
+.app-download-card .store-btn:hover .store-icon,
+.app-download-card .store-btn:focus-visible .store-icon,
+.app-download-card .store-btn:active .store-icon {
+  filter: none;
+  opacity: 1;
+}
+
+
+/* Bookings Page */
+.jr-app-page.is-bookings {
+  background: #fbf8fc;
+}
+.jr-app-page.is-bookings .jr-header {
+  background: #fbf8fc;
+  border-bottom: none;
+}
+.my-bookings-shell {
+  width: min(100%, 1020px);
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+.bookings-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 32px;
+}
+.bookings-head .eyebrow {
+  color: #ff7a00;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin: 0 0 8px;
+}
+.bookings-head h1 {
+  font-size: 40px;
+  font-weight: 800;
+  color: #1a1523;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+}
+.bookings-head p {
+  color: #595560;
+  font-size: 16px;
+  margin: 0;
+}
+.bookings-head > div:last-child {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.booking-search-field {
+  display: flex;
+  align-items: center;
+  background: #f4f0f6;
+  border-radius: 999px;
+  padding: 0 16px;
+  height: 48px;
+  width: 240px;
+}
+.booking-search-field img {
+  width: 18px;
+  opacity: 0.5;
+  margin-right: 12px;
+}
+.booking-search-field input {
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  color: #1a1523;
+}
+.booking-search-field input::placeholder {
+  color: #8c8894;
+}
+.bookings-head button {
+  height: 48px;
+  padding: 0 24px;
+  background: #3c1b69;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.booking-tabs {
+  display: flex;
+  gap: 32px;
+  border-bottom: 1px solid #f2ebf5;
+  margin-bottom: 24px;
+}
+.booking-tabs button {
+  background: transparent;
+  color: #6a6673;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 0 8px 16px;
+  position: relative;
+  transition: 0.2s;
+}
+.booking-tabs button.is-active {
+  color: #3c1b69;
+}
+.booking-tabs button.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #3c1b69;
+}
+.booking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.booking-list article {
+  position: relative;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+.trip-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+}
+.trip-icon.is-business {
+  background: #eae6f3;
+}
+.trip-icon.is-business img {
+  filter: brightness(0) saturate(100%) invert(18%) sepia(47%) saturate(3015%) hue-rotate(248deg) brightness(50%) contrast(100%);
+}
+.trip-icon.is-premium {
+  background: #ffebd3;
+}
+.trip-icon.is-premium img {
+  filter: brightness(0) saturate(100%) invert(48%) sepia(87%) saturate(1637%) hue-rotate(357deg) brightness(101%) contrast(106%);
+}
+.trip-details {
+  flex: 1;
+}
+.trip-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.trip-tier {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.trip-tier.is-business {
+  background: #eae6f3;
+  color: #3c1b69;
+}
+.trip-tier.is-premium {
+  background: #ffebd3;
+  color: #f17a1e;
+}
+.trip-title-row p {
+  margin: 0;
+  color: #595560;
+  font-size: 13px;
+}
+.trip-details h2 {
+  font-size: 16px;
+  color: #1a1523;
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+.trip-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+  font-size: 14px;
+  color: #6a6673;
+}
+.trip-meta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.trip-meta img {
+  opacity: 0.5;
+}
+.trip-status {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.trip-status.is-confirmed {
+  background: #e1fbe8;
+  color: #06a350;
+}
+.trip-status.is-confirmed i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #06a350;
+}
+.trip-status.is-scheduled {
+  background: #f0ebf4;
+  color: #3c1b69;
+}
+.booking-list article > button {
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  margin-left: 8px;
+}
+.booking-list article > button:nth-of-type(1) {
+  background: #ffffff;
+}
+.booking-list article:nth-child(1) > button:nth-of-type(1) {
+  border: 1px solid #dcd3e4;
+  color: #1a1523;
+}
+.booking-list article:nth-child(1) > button:nth-of-type(2) {
+  background: #3c1b69;
+  color: #ffffff;
+}
+.booking-list article:nth-child(2) > button:nth-of-type(1) {
+  border: 1px solid #e5e5e5;
+  color: #1a1523;
+}
+.booking-list article:nth-child(2) > button:nth-of-type(2) {
+  background: #e6e6e6;
+  color: #1a1523;
+}
+.load-history {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 32px auto 0;
+  padding: 12px 24px;
+  background: transparent;
+  border: 1px solid #dcd3e4;
+  color: #3c1b69;
+  font-weight: 600;
+  border-radius: 999px;
+  gap: 8px;
+}
+
+
+.trip-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+.trip-status {
+  position: static;
+}
+.trip-actions-buttons {
+  display: flex;
+  gap: 8px;
+}
+.trip-actions-buttons button {
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+}
+.booking-list article:nth-child(1) .trip-actions-buttons > button:nth-of-type(1) {
+  border: 1px solid #dcd3e4;
+  color: #1a1523;
+  background: #ffffff;
+}
+.booking-list article:nth-child(1) .trip-actions-buttons > button:nth-of-type(2) {
+  background: #3c1b69;
+  color: #ffffff;
+}
+.booking-list article:nth-child(2) .trip-actions-buttons > button:nth-of-type(1) {
+  border: 1px solid #e5e5e5;
+  color: #1a1523;
+  background: #ffffff;
+}
+.booking-list article:nth-child(2) .trip-actions-buttons > button:nth-of-type(2) {
+  background: #e6e6e6;
+  color: #1a1523;
+}
+
+.cancelled-bookings-panel {
+  margin-top: 24px;
+}
+
+.cancelled-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.cancelled-summary article {
+  min-height: 108px;
+  padding: 22px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid rgba(180, 35, 24, 0.1);
+  box-shadow: 0 14px 34px rgba(88, 57, 101, 0.06);
+}
+
+.cancelled-summary span {
+  display: block;
+  color: #b42318;
+  font-size: 30px;
+  line-height: 36px;
+  font-weight: 900;
+}
+
+.cancelled-summary p,
+.cancelled-trip-note {
+  margin: 0;
+  color: #6a6673;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.cancelled-trip-note {
+  margin-top: 10px;
+}
+
+.cancelled-trip-note strong {
+  display: inline-flex;
+  margin-left: 8px;
+  color: #067647;
+  font-weight: 900;
+}
+
+.trip-status.is-cancelled {
+  color: #b42318;
+  background: #fff1f0;
+}
+
+.booking-list article:has(.trip-status.is-cancelled) .trip-actions-buttons > button:nth-of-type(1) {
+  color: #ffffff;
+  background: #3b1d79;
+  border-color: transparent;
+}
+
+.booking-list article:has(.trip-status.is-cancelled) .trip-actions-buttons > button:nth-of-type(2) {
+  color: #3b1d79;
+  background: #ffffff;
+  border: 1px solid rgba(59, 29, 121, 0.14);
+}
+
+/* Interaction refinements */
+.booking-tabs button {
+  transition: color .18s ease, border-color .18s ease, background-color .18s ease;
+}
+
+.booking-tabs button:hover,
+.booking-tabs button:focus-visible {
+  color: #ff5c00;
+  border-bottom-color: rgba(255, 92, 0, 0.5);
+}
+
+.booking-tabs button:active {
+  color: #3b1d79;
+  border-bottom-color: #3b1d79;
+}
+
+.booking-tabs button.is-active,
+.booking-tabs button[aria-selected="true"] {
+  color: #3b1d79;
+  border-bottom-color: #3b1d79;
+}
+
+.cancelled-summary article,
+.booking-list article {
+  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+.cancelled-summary article:hover,
+.cancelled-summary article:focus-within,
+.booking-list article:hover,
+.booking-list article:focus-within {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 42px rgba(88, 57, 101, 0.1);
+}
+
+.cancelled-summary article:hover,
+.cancelled-summary article:focus-within {
+  border-color: rgba(180, 35, 24, 0.24);
+}
+
+.payment-page .payment-method {
+  cursor: pointer;
+  transition: border-color .18s ease, background-color .18s ease, box-shadow .18s ease;
+}
+
+.payment-page .payment-method:hover,
+.payment-page .payment-method:focus-visible,
+.payment-page .payment-method:focus-within {
+  border-color: rgba(255, 122, 0, 0.46);
+  box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.1);
+}
+
+.payment-page .payment-method:active {
+  border-color: #ff7a00;
+  box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.18);
+}
+
+.payment-page .payment-method.is-active,
+.payment-page .payment-method[aria-pressed="true"] {
+  border-color: #ff7a00;
+  box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.13);
+}
+
+.payment-page .payment-method:not(.is-active) .selected-icon {
+  opacity: 0.22;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* Stable booking tabs: prevent hover/selected vertical jump */
+.booking-tabs {
+  align-items: flex-end;
+  min-height: 48px;
+}
+
+.booking-tabs button,
+.booking-tabs button:hover,
+.booking-tabs button:focus-visible,
+.booking-tabs button:active,
+.booking-tabs button.is-active,
+.booking-tabs button[aria-selected="true"] {
+  height: 48px;
+  min-height: 48px;
+  padding: 0 8px;
+  border: 0;
+  border-bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 20px;
+  position: relative;
+  transform: none;
+  box-shadow: none;
+}
+
+.booking-tabs button::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 999px;
+  background: transparent;
+  transition: background-color .18s ease;
+}
+
+.booking-tabs button:hover::after,
+.booking-tabs button:focus-visible::after {
+  background: rgba(255, 92, 0, 0.45);
+}
+
+.booking-tabs button.is-active::after,
+.booking-tabs button[aria-selected="true"]::after {
+  background: #3b1d79;
+}
+
+/* Saved card footer actions */
+.method-card-foot button:not(.set-primary-btn):hover,
+.method-card-foot button:not(.set-primary-btn):focus-visible,
+.method-card-foot button:not(.set-primary-btn):active {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 92, 0, 0.1);
+  box-shadow: none;
+  transform: none;
+}
+
+.method-card-foot button:not(.set-primary-btn):active {
+  background: rgba(255, 92, 0, 0.16);
+}
+
+.method-card-foot .set-primary-btn:hover,
+.method-card-foot .set-primary-btn:focus-visible,
+.method-card-foot .set-primary-btn:active {
+  background: rgba(255, 92, 0, 0.08);
+  box-shadow: none;
+  color: #e55200;
+  transform: none;
+}
+
+/* Responsive pass 1: shared app headers and navigation */
+.jr-header,
+.search-header,
+.payment-header,
+.service-nav {
+  max-width: 100%;
+}
+
+.jr-header nav,
+.search-header nav,
+.payment-header nav,
+.service-nav nav {
+  min-width: 0;
+}
+
+.jr-header nav button,
+.search-header nav button,
+.payment-header nav button,
+.service-nav nav button {
+  white-space: nowrap;
+}
+
+@media (max-width: 1100px) {
+  .jr-header {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 16px;
+    padding: 0 22px;
+  }
+
+  .jr-header nav,
+  .search-header nav,
+  .payment-header nav,
+  .service-nav nav {
+    gap: 12px;
+  }
+
+  .header-search {
+    width: 150px;
+  }
+
+  .search-header,
+  .payment-header,
+  .service-nav {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (max-width: 860px) {
+  .jr-header,
+  .search-header,
+  .payment-header {
+    height: auto;
+    min-height: 72px;
+    padding: 14px 18px;
+    gap: 14px;
+  }
+
+  .jr-header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .jr-header .app-brand {
+    grid-column: 1;
+  }
+
+  .jr-header-actions {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .jr-header nav {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+
+  .jr-header nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .header-search-wrap {
+    display: none;
+  }
+
+  .search-header,
+  .payment-header,
+  .service-nav {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .search-header .app-brand,
+  .payment-header .app-brand,
+  .service-nav .app-brand {
+    flex: 1 1 auto;
+  }
+
+  .search-header-right,
+  .payment-header-actions {
+    flex: 0 0 auto;
+    gap: 10px;
+  }
+
+  .search-header nav,
+  .payment-header nav,
+  .service-nav nav {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+
+  .search-header nav::-webkit-scrollbar,
+  .payment-header nav::-webkit-scrollbar,
+  .service-nav nav::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .app-brand {
+    gap: 8px;
+    font-size: 17px;
+    min-width: 0;
+  }
+
+  .app-brand img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .app-brand span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .jr-header,
+  .search-header,
+  .payment-header,
+  .service-nav {
+    padding: 12px 14px;
+  }
+
+  .jr-header-actions,
+  .search-header-right,
+  .payment-header-actions {
+    gap: 8px;
+  }
+
+  .notification-icon,
+  .help-icon {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+  }
+
+  .avatar,
+  .search-header .avatar,
+  .payment-header .avatar {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    padding: 3px;
+    border-width: 3px;
+  }
+
+  .jr-header nav button,
+  .search-header nav button,
+  .payment-header nav button,
+  .service-nav nav button {
+    min-height: 34px;
+    padding: 0 11px;
+    font-size: 13px;
+  }
+
+  .service-nav .book-now {
+    min-width: auto;
+    min-height: 38px;
+    padding: 0 16px;
+  }
+}
+

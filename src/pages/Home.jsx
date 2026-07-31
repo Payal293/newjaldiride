@@ -29,6 +29,7 @@ import driverBg from '../assets/driver/driver-bg.jpg';
 
 import appleLogo from '../assets/driver/applelogo.png';
 import googlePlayLogo from '../assets/driver/googleplay.png';
+import scannerImage from '../assets/driver/scanner image.jpg';
 
 import emailIcon from '../assets/driver/email.svg';
 import phoneIcon from '../assets/driver/phone.svg';
@@ -630,51 +631,7 @@ export default function Home({ onNavigate = () => {}, initialMode = 'ride' }) {
               
               <div className="qr-container">
                 <div className="qr-card">
-                  <svg className="qr-code-svg" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0" y="0" width="7" height="7" fill="#000000" />
-                    <rect x="1" y="1" width="5" height="5" fill="#FFFFFF" />
-                    <rect x="2" y="2" width="3" height="3" fill="#000000" />
-                    
-                    <rect x="14" y="0" width="7" height="7" fill="#000000" />
-                    <rect x="15" y="1" width="5" height="5" fill="#FFFFFF" />
-                    <rect x="16" y="2" width="3" height="3" fill="#000000" />
-                    
-                    <rect x="0" y="14" width="7" height="7" fill="#000000" />
-                    <rect x="1" y="15" width="5" height="5" fill="#FFFFFF" />
-                    <rect x="2" y="16" width="3" height="3" fill="#000000" />
-                    
-                    <rect x="14" y="14" width="5" height="5" fill="#000000" />
-                    <rect x="15" y="15" width="3" height="3" fill="#FFFFFF" />
-                    <rect x="16" y="16" width="1" height="1" fill="#000000" />
-                    
-                    <rect x="9" y="0" width="1" height="3" fill="#000000" />
-                    <rect x="11" y="1" width="2" height="1" fill="#000000" />
-                    <rect x="8" y="3" width="2" height="2" fill="#000000" />
-                    <rect x="11" y="4" width="1" height="3" fill="#000000" />
-                    <rect x="8" y="6" width="1" height="2" fill="#000000" />
-                    
-                    <rect x="0" y="9" width="3" height="1" fill="#000000" />
-                    <rect x="4" y="8" width="1" height="2" fill="#000000" />
-                    <rect x="2" y="11" width="2" height="1" fill="#000000" />
-                    <rect x="6" y="10" width="2" height="3" fill="#000000" />
-                    
-                    <rect x="9" y="8" width="3" height="3" fill="#000000" />
-                    <rect x="10" y="9" width="1" height="1" fill="#FFFFFF" />
-                    <rect x="13" y="9" width="1" height="2" fill="#000000" />
-                    <rect x="15" y="8" width="2" height="1" fill="#000000" />
-                    <rect x="18" y="9" width="1" height="3" fill="#000000" />
-                    
-                    <rect x="8" y="13" width="2" height="1" fill="#000000" />
-                    <rect x="11" y="12" width="2" height="2" fill="#000000" />
-                    <rect x="9" y="15" width="2" height="1" fill="#000000" />
-                    <rect x="8" y="17" width="3" height="2" fill="#000000" />
-                    
-                    <rect x="14" y="11" width="3" height="1" fill="#000000" />
-                    <rect x="16" y="12" width="1" height="2" fill="#000000" />
-                    <rect x="19" y="15" width="2" height="1" fill="#000000" />
-                    <rect x="19" y="17" width="1" height="3" fill="#000000" />
-                    <rect x="14" y="19" width="4" height="1" fill="#000000" />
-                  </svg>
+                  <img className="qr-code-image" src={scannerImage} alt="JaldiRide app scanner" />
                 </div>
                 <span className="qr-label">Scan to<br />download the<br />app</span>
               </div>
