@@ -68,12 +68,17 @@ import bookingDropIcon from "../assets/bookings/drop.svg";
 import bookingSeatIcon from "../assets/bookings/seat.svg";
 import paymentRideIcon from "../assets/payment/ride.svg";
 import paymentDistanceIcon from "../assets/payment/distance.svg";
-import paymentDigitalIcon from "../assets/payment/digital.svg";
 import paymentNetIcon from "../assets/payment/net.svg";
 import paymentLockIcon from "../assets/payment/lock.svg";
 import paymentSecureIcon from "../assets/payment/secure.svg";
 import paymentPciIcon from "../assets/payment/pci.svg";
 import paymentRightIcon from "../assets/payment/right.svg";
+import bankDigitalIcon from "../assets/bank/Digital.svg";
+import bankCreditsIcon from "../assets/bank/credits.svg";
+import bankGooglePayIcon from "../assets/bank/google pay.svg";
+import bankIcon from "../assets/bank/banks.svg";
+import phonePeIcon from "../assets/bank/phonepe.svg";
+import paytmIcon from "../assets/bank/paytm.svg";
 import successCopyIcon from "../assets/success/copy.svg";
 import successHomeIcon from "../assets/success/home.svg";
 import successPremiumRideIcon from "../assets/success/light.svg";
@@ -96,14 +101,13 @@ function BrandButton({ onNavigate }) {
   )
 }
 
-function AppHeader({ active = 'Home', onNavigate, showSearch = true }) {
+function AppHeader({ active = 'Home', onNavigate, showSearch = true, navItems }) {
   const [searchValue, setSearchValue] = useState('')
   const [searchError, setSearchError] = useState('')
-  const items = [
+  const items = navItems || [
     ['Home', 'dashboard'],
     ['Bookings', 'bookings'],
-    ['Profile', 'profile'],
-    ['Settings', 'security'],
+    ['Rewards', 'rewards'],
   ]
 
   const handleHeaderSearch = (event) => {
@@ -230,7 +234,7 @@ function PaymentHeader({ onNavigate }) {
 
       <nav aria-label="Payment navigation">
         <button className="is-active" type="button">Payment</button>
-        <button type="button" onClick={() => onNavigate('notifications')}>Support</button>
+        <button type="button" onClick={() => onNavigate('support')}>Support</button>
       </nav>
 
       <div className="payment-header-actions">
@@ -551,7 +555,7 @@ const shortcuts = [
                 onClick={() => {
                   if (label === 'Payment Methods') onNavigate('profile-payments');
                   if (label === 'Security & Privacy') onNavigate('security');
-                  if (label === 'Priority Support') onNavigate('notifications');
+                  if (label === 'Priority Support') onNavigate('support');
                 }}
               >
                 <span>
@@ -713,9 +717,16 @@ export function SearchPage({ onNavigate }) {
   )
 }
 export function BookingDetailsPage({ onNavigate }) {
+  const bookingNavItems = [
+    ['Home', 'dashboard'],
+    ['Bookings', 'bookings'],
+    ['Profile', 'profile'],
+    ['Settings', 'security'],
+  ]
+
   return (
     <main className="jr-app-page">
-      <AppHeader active="Bookings" onNavigate={onNavigate} showSearch={false} />
+      <AppHeader active="Bookings" onNavigate={onNavigate} showSearch={false} navItems={bookingNavItems} />
       <section className="booking-detail-shell">
         <p className="eyebrow">Review Journey</p>
         <h1>Booking Details</h1>
@@ -780,8 +791,454 @@ export function BookingDetailsPage({ onNavigate }) {
   )
 }
 
+function RewardsUiIcon({ name }) {
+  const icons = {
+    dashboard: (
+      <svg viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="3" width="7" height="7" rx="1.5" />
+        <rect x="14" y="3" width="7" height="7" rx="1.5" />
+        <rect x="3" y="14" width="7" height="7" rx="1.5" />
+        <rect x="14" y="14" width="7" height="7" rx="1.5" />
+      </svg>
+    ),
+    bookings: (
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M5 7h14M7 3v4M17 3v4M5 11h14v10H5z" />
+      </svg>
+    ),
+    'elite-club': (
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="8" />
+        <path d="M12 7.5l1.1 2.3 2.5.4-1.8 1.7.4 2.5-2.2-1.2-2.2 1.2.4-2.5-1.8-1.7 2.5-.4z" />
+      </svg>
+    ),
+    concierge: (
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M12 3a9 9 0 1 0 9 9" />
+        <path d="M12 7v5l3 2" />
+        <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none" />
+      </svg>
+    ),
+    history: (
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="8" />
+        <path d="M12 8v4l3 2" />
+      </svg>
+    ),
+    support: (
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="8" />
+        <path d="M9.5 9.5a2.5 2.5 0 0 1 4.2 1.8c0 1.7-2.2 2-2.2 3.7" />
+        <circle cx="12" cy="17" r="0.8" fill="currentColor" stroke="none" />
+      </svg>
+    ),
+    'sign-out': (
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M10 7V5a2 2 0 0 1 2-2h7v18h-7a2 2 0 0 1-2-2v-2" />
+        <path d="M3 12h11M7 8l-4 4 4 4" />
+      </svg>
+    ),
+  }
+
+  return <span className="rewards-ui-icon" aria-hidden="true">{icons[name]}</span>
+}
+
+function EliteClubPanelContent() {
+  const perks = [
+    {
+      title: 'Lounge Access',
+      text: 'Complimentary access to 500+ global airport lounges.',
+      icon: flightDashIcon,
+      tone: 'purple',
+    },
+    {
+      title: 'Priority Pickup',
+      text: 'Zero wait times with dedicated elite pickup zones.',
+      icon: trackIcon,
+      tone: 'orange',
+    },
+    {
+      title: 'Elite Chauffeur',
+      text: 'Certified professional drivers for every premium ride.',
+      icon: rideDashIcon,
+      tone: 'purple',
+    },
+    {
+      title: 'Concierge Service',
+      text: '24/7 personal assistance for travel and lifestyle.',
+      icon: priorityIcon,
+      tone: 'orange',
+    },
+  ]
+
+  const historyRows = [
+    ['Airport Transfer - LHR', 'Oct 12, 2023', '+450 pts', 'Credited'],
+    ['Premium Sedan - Mumbai', 'Oct 08, 2023', '+280 pts', 'Credited'],
+    ['Concierge Booking', 'Oct 01, 2023', '+120 pts', 'Credited'],
+  ]
+
+  return (
+    <div className="rewards-panel">
+      <article className="rewards-hero-row">
+        <div className="rewards-hero-copy">
+          <span className="rewards-hero-tag">ELITE CLUB MEMBER</span>
+          <h1>Black Tier Member</h1>
+          <p>You are among the top 1% of our global commuters. Enjoy exclusive benefits tailored for your lifestyle.</p>
+        </div>
+        <article className="rewards-points-card">
+          <span>TOTAL LOYALTY POINTS</span>
+          <strong>12,450 <small>pts</small></strong>
+          <div className="rewards-tier-row">
+            <span>BLACK TIER</span>
+            <span>PLATINUM TIER</span>
+          </div>
+          <div className="rewards-progress"><i /></div>
+          <small>2,550 pts until your next upgrade</small>
+        </article>
+      </article>
+
+      <div className="rewards-section-head">
+        <h2>Your Exclusive Perks</h2>
+        <button type="button">View All Benefits</button>
+      </div>
+
+      <div className="rewards-perks-grid">
+        {perks.map((perk) => (
+          <article className="rewards-perk-card" key={perk.title}>
+            <span className={`rewards-perk-icon is-${perk.tone}`}>
+              <img src={perk.icon} alt="" aria-hidden="true" />
+            </span>
+            <h3>{perk.title}</h3>
+            <p>{perk.text}</p>
+          </article>
+        ))}
+      </div>
+
+      <div className="rewards-lower-grid">
+        <section className="rewards-history-card">
+          <h2>Recent Activity</h2>
+          <div className="rewards-history-table">
+            <div className="rewards-history-head">
+              <span>Activity</span>
+              <span>Date</span>
+              <span>Points</span>
+              <span>Status</span>
+            </div>
+            {historyRows.map(([activity, date, points, status]) => (
+              <div className="rewards-history-row" key={activity}>
+                <strong>{activity}</strong>
+                <span>{date}</span>
+                <b>{points}</b>
+                <em>{status}</em>
+              </div>
+            ))}
+          </div>
+          <button type="button">View Full History</button>
+        </section>
+
+        <section className="rewards-roadmap-card">
+          <h2>Tier Roadmap</h2>
+          <article className="rewards-roadmap-step">
+            <span />
+            <div>
+              <strong>Gold Tier</strong>
+              <p>Unlocked at 5,000 points</p>
+            </div>
+          </article>
+          <article className="rewards-roadmap-step is-black">
+            <span />
+            <div>
+              <strong>Black Tier</strong>
+              <p>Your current elite status</p>
+            </div>
+          </article>
+          <article className="rewards-roadmap-step is-active">
+            <span />
+            <div>
+              <strong>Platinum Tier</strong>
+              <p>Unlock at 15,000 points</p>
+            </div>
+          </article>
+          <div className="rewards-roadmap-callout">
+            <strong>Almost there</strong>
+            <p>Earn 2,550 more points to unlock Platinum benefits.</p>
+          </div>
+          <button type="button">Explore Platinum Perks</button>
+        </section>
+      </div>
+
+      <article className="rewards-banner" style={{ '--rewards-bg': `url(${offerImage})` }}>
+        <div>
+          <h2>Upgrade to Platinum</h2>
+          <p>Unlock global airport lounge access, private chauffeurs, and zero cancellation fees.</p>
+        </div>
+        <button type="button">Learn More</button>
+      </article>
+    </div>
+  )
+}
+
+function EliteDashboardPanelContent({ onNavigate }) {
+  const services = [
+    ['Ride', dashboardRideIcon],
+    ['Bus', dashboardBusIcon],
+    ['Hotels', dashboardHotelIcon],
+    ['Flights', dashboardFlightIcon],
+  ]
+  const bookings = [
+    {
+      title: 'BOM -> LHR, Flight UK201',
+      meta: 'OCT 12, 2023 - Confirmed',
+      price: formatMoney(42500),
+      icon: flightDashIcon,
+    },
+    {
+      title: 'Airport Transfer - Toyota Camry',
+      meta: 'OCT 10, 2023 - Completed',
+      price: formatMoney(1200),
+      icon: rideDashIcon,
+    },
+  ]
+
+  return (
+    <div className="rewards-panel rewards-embedded-dashboard">
+      <div className="dashboard-title">
+        <div>
+          <h1>Good morning, James</h1>
+          <p>Where are you heading today? You have <span>1 active journey.</span></p>
+        </div>
+        <div className="member-badge">
+          <img src={goldMemberIcon} alt="" aria-hidden="true" />
+          <div>
+            <span>BLACK TIER</span>
+            <strong>12,450 Points</strong>
+          </div>
+        </div>
+      </div>
+      <div className="service-shortcuts">
+        {services.map(([label, icon]) => (
+          <button key={label} type="button" onClick={() => (label === 'Hotels' || label === 'Flights' ? onNavigate('service', { service: label.toLowerCase() }) : onNavigate('search'))}>
+            <img src={icon} alt="" aria-hidden="true" />
+            {label}
+          </button>
+        ))}
+      </div>
+      <section className="recent-card">
+        <h2>
+          Recent Bookings
+          <button type="button">View All</button>
+        </h2>
+        <div className="booking-list-mini">
+          {bookings.map((booking) => (
+            <article key={booking.title}>
+              <span className="booking-mini-icon">
+                <img src={booking.icon} alt="" aria-hidden="true" />
+              </span>
+              <div>
+                <strong>{booking.title}</strong>
+                <small>{booking.meta}</small>
+              </div>
+              <b>{booking.price}</b>
+            </article>
+          ))}
+        </div>
+      </section>
+    </div>
+  )
+}
+
+function EliteConciergePanelContent() {
+  const messages = [
+    {
+      id: 1,
+      type: 'assistant',
+      time: '09:12 AM',
+      text: 'Good morning, Mr. Harrington. Your flight to London has been confirmed for 3:00 PM. I\'ve also pre-arranged your airport transfer for 12:30 PM.',
+    },
+    {
+      id: 2,
+      type: 'user',
+      time: '09:15 AM',
+      text: 'Excellent. Could you also ensure there\'s a reservation at The Ledbury for 8:00 PM tonight?',
+    },
+    {
+      id: 3,
+      type: 'assistant',
+      time: '09:20 AM',
+      text: 'Consider it done. Your chauffeur, Michael, will be ready at the arrivals hall with your preferred chilled sparkling water.',
+    },
+  ]
+
+  return (
+    <div className="rewards-panel rewards-embedded-concierge">
+      <section className="concierge-chat-column">
+        <div className="concierge-chat-header">
+          <div className="concierge-agent">
+            <span className="concierge-agent-avatar">
+              <img src={profileImg} alt="" aria-hidden="true" />
+            </span>
+            <div>
+              <h1>Sarah — Executive Concierge</h1>
+              <p><span className="is-online" />Online</p>
+            </div>
+          </div>
+          <div className="concierge-chat-actions">
+            <button type="button" aria-label="Call concierge">⌂</button>
+            <button type="button" aria-label="Video call">▣</button>
+            <button type="button" aria-label="More options">⋮</button>
+          </div>
+        </div>
+
+        <div className="concierge-feed">
+          <span className="concierge-today-pill">TODAY</span>
+          {messages.map((message) => (
+            <article key={message.id} className={`concierge-message is-${message.type}`}>
+              <span className="concierge-message-avatar">
+                <img src={profileImg} alt="" aria-hidden="true" />
+              </span>
+              <div className="concierge-message-body">
+                <p>{message.text}</p>
+                <small>{message.time}</small>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <form className="concierge-composer" onSubmit={(event) => event.preventDefault()}>
+          <button type="button" aria-label="Add attachment">+</button>
+          <button type="button" aria-label="Add emoji">☺</button>
+          <input type="text" placeholder="Message your concierge..." />
+          <button type="button" aria-label="Voice input">⌁</button>
+          <button type="submit" aria-label="Send message">→</button>
+        </form>
+      </section>
+    </div>
+  )
+}
+
+export function RewardsPage({ onNavigate }) {
+  const [activeSection, setActiveSection] = useState('elite-club')
+
+  const sidebarItems = [
+    { id: 'dashboard', label: 'Dashboard' },
+    { id: 'bookings', label: 'Bookings' },
+    { id: 'elite-club', label: 'Elite Club' },
+    { id: 'concierge', label: 'Concierge' },
+    { id: 'history', label: 'History' },
+  ]
+
+  const handleSectionChange = (sectionId) => {
+    setActiveSection(sectionId)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const renderPanel = () => {
+    if (activeSection === 'dashboard') {
+      return <EliteDashboardPanelContent onNavigate={onNavigate} />
+    }
+    if (activeSection === 'bookings') {
+      return <BookingsPanelContent onNavigate={onNavigate} initialTab="upcoming" embedded />
+    }
+    if (activeSection === 'history') {
+      return <BookingsPanelContent onNavigate={onNavigate} initialTab="history" embedded />
+    }
+    if (activeSection === 'concierge') {
+      return <EliteConciergePanelContent />
+    }
+    if (activeSection === 'support') {
+      return <SupportPanelContent embedded />
+    }
+    return <EliteClubPanelContent />
+  }
+
+  return (
+    <main className="rewards-page">
+      <header className="rewards-header">
+        <button className="rewards-brand" type="button" onClick={() => onNavigate('dashboard')} aria-label="JaldiRide home">
+          <img src={logoImage} alt="" aria-hidden="true" />
+          <span>JaldiRide</span>
+        </button>
+
+        <form className="rewards-search" onSubmit={(event) => event.preventDefault()}>
+          <button type="submit" aria-label="Search rewards">
+            <img src={searchIcon} alt="" aria-hidden="true" />
+          </button>
+          <input type="search" placeholder="Search rewards, destinations..." />
+        </form>
+
+        <div className="rewards-header-actions">
+          <button className="notification-icon" type="button" onClick={() => onNavigate('notifications')} aria-label="Notifications">
+            <img src={bellIcon} alt="" aria-hidden="true" />
+          </button>
+          <button className="help-icon" type="button" onClick={() => handleSectionChange('support')} aria-label="Support">⚙</button>
+          <div className="rewards-user-chip">
+            <strong>James Harrington</strong>
+            <small>Black Tier</small>
+          </div>
+          <button className="avatar rewards-avatar" type="button" onClick={() => onNavigate('profile')} aria-label="Profile">
+            <img src={profileImg} alt="" aria-hidden="true" />
+          </button>
+        </div>
+      </header>
+
+      <section className="rewards-layout">
+        <aside className="rewards-sidebar">
+          <div className="rewards-sidebar-brand">
+            <strong>JaldiRide</strong>
+            <span>ELITE MOBILITY</span>
+          </div>
+
+          <nav aria-label="Elite navigation">
+            {sidebarItems.map((item) => (
+              <button
+                key={item.id}
+                className={activeSection === item.id ? 'is-active' : ''}
+                type="button"
+                onClick={() => handleSectionChange(item.id)}
+              >
+                <RewardsUiIcon name={item.id} />
+                {item.label}
+              </button>
+            ))}
+          </nav>
+
+          <button className="rewards-upgrade-button" type="button">Upgrade to Platinum</button>
+
+          <div className="rewards-sidebar-footer">
+            <button
+              className={activeSection === 'support' ? 'is-active' : ''}
+              type="button"
+              onClick={() => handleSectionChange('support')}
+            >
+              <RewardsUiIcon name="support" />
+              Support
+            </button>
+            <button type="button" onClick={() => onNavigate('home')}>
+              <RewardsUiIcon name="sign-out" />
+              Sign Out
+            </button>
+          </div>
+        </aside>
+
+        <div className="rewards-main" key={activeSection}>
+          {renderPanel()}
+        </div>
+      </section>
+    </main>
+  )
+}
+
 export function PaymentPage({ onNavigate }) {
-  const [activeMethod, setActiveMethod] = useState(null)
+  const [activeMethod, setActiveMethod] = useState('card')
+  const [activeWallet, setActiveWallet] = useState('google')
+  const [activeBank, setActiveBank] = useState('HDFC Bank')
+  const walletOptions = [
+    ['google', 'Google Pay', bankGooglePayIcon],
+    ['phonepe', 'PhonePe', phonePeIcon],
+    ['paytm', 'Paytm', paytmIcon],
+  ]
+  const popularBanks = ['HDFC Bank', 'ICICI Bank', 'SBI', 'Axis Bank']
+
   const handlePaymentKeyDown = (event, method) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
@@ -816,36 +1273,86 @@ export function PaymentPage({ onNavigate }) {
               tabIndex={0}
               aria-pressed={activeMethod === 'card'}
             >
-              <span className="card-icon" aria-hidden="true"><span /></span>
-              <div><h2>Credit / Debit Card</h2><p>Ending in 4242 &bull; Expires 12/26</p></div>
-              <img className="selected-icon" src={paymentRightIcon} alt="" aria-hidden="true" />
+              <span className="payment-method-icon" style={{ '--method-icon-url': `url(${bankCreditsIcon})` }} aria-hidden="true" />
+              <div className="payment-method-copy"><h2>Credit / Debit Card</h2><p>Ending in 4242 &bull; Expires 12/26</p></div>
+              {activeMethod === 'card' ? <img className="selected-icon" src={paymentRightIcon} alt="" aria-hidden="true" /> : <b>&rsaquo;</b>}
               {activeMethod === 'card' ? (
-                <>
+                <div className="payment-cvv-row">
                   <label>CVV<input type="password" placeholder="•••" /></label>
                   <small>Verified by Visa & Mastercard SecureCode</small>
-                </>
+                </div>
               ) : null}
             </div>
-            <button 
+            <div 
               className={`payment-method ${activeMethod === 'digital' ? 'is-active' : ''}`} 
-              type="button"
               onClick={() => setActiveMethod('digital')}
+              onKeyDown={(event) => handlePaymentKeyDown(event, 'digital')}
+              role="button"
+              tabIndex={0}
               aria-pressed={activeMethod === 'digital'}
             >
-              <img className="method-icon" src={paymentDigitalIcon} alt="" aria-hidden="true" />
-              <div><h2>Digital Wallets</h2><p>Google Pay, PhonePe, Paytm</p></div>
-              <b>&rsaquo;</b>
-            </button>
-            <button 
+              <span className="payment-method-icon" style={{ '--method-icon-url': `url(${bankDigitalIcon})` }} aria-hidden="true" />
+              <div className="payment-method-copy"><h2>Digital Wallets</h2><p>{activeMethod === 'digital' ? 'Select your preferred wallet' : 'Google Pay, PhonePe, Paytm'}</p></div>
+              {activeMethod === 'digital' ? <img className="selected-icon" src={paymentRightIcon} alt="" aria-hidden="true" /> : <b>&rsaquo;</b>}
+              {activeMethod === 'digital' ? (
+                <div className="wallet-options" aria-label="Wallet options">
+                  {walletOptions.map(([id, label, icon]) => (
+                    <div 
+                      key={id} 
+                      className={`wallet-option ${activeWallet === id ? 'is-selected' : ''}`}
+                      onClick={(e) => { e.stopPropagation(); setActiveWallet(id); }}
+                      role="button"
+                      tabIndex={0}
+                    >
+                      <span><img src={icon} alt="" aria-hidden="true" /></span>
+                      <strong>{label}</strong>
+                      {activeWallet === id ? <img className="wallet-check" src={paymentRightIcon} alt="" aria-hidden="true" /> : null}
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+            <div 
               className={`payment-method ${activeMethod === 'net' ? 'is-active' : ''}`} 
-              type="button"
               onClick={() => setActiveMethod('net')}
+              onKeyDown={(event) => handlePaymentKeyDown(event, 'net')}
+              role="button"
+              tabIndex={0}
               aria-pressed={activeMethod === 'net'}
             >
-              <img className="method-icon" src={paymentNetIcon} alt="" aria-hidden="true" />
-              <div><h2>Net Banking</h2><p>Choose from 40+ banks</p></div>
-              <b>&rsaquo;</b>
-            </button>
+              <span className="payment-method-icon" style={{ '--method-icon-url': `url(${bankIcon})` }} aria-hidden="true" />
+              <div className="payment-method-copy"><h2>Net Banking</h2><p>Choose from 40+ banks</p></div>
+              {activeMethod === 'net' ? <img className="selected-icon" src={paymentRightIcon} alt="" aria-hidden="true" /> : <b>&rsaquo;</b>}
+              {activeMethod === 'net' ? (
+                <div className="net-banking-panel">
+                  <h3>Popular Banks</h3>
+                  <div className="popular-bank-grid">
+                    {popularBanks.map((bank) => (
+                      <div 
+                        key={bank} 
+                        className={activeBank === bank ? 'is-selected' : ''}
+                        onClick={(e) => { e.stopPropagation(); setActiveBank(bank); }}
+                        role="button"
+                        tabIndex={0}
+                      >
+                        <span><img src={bankIcon} alt="" aria-hidden="true" /></span>
+                        {bank}
+                      </div>
+                    ))}
+                  </div>
+                  <h3>Other Banks</h3>
+                  <label className="other-bank-select" onClick={(event) => event.stopPropagation()}>
+                    <span aria-hidden="true" />
+                    <select defaultValue="">
+                      <option value="" disabled>Search for other banks</option>
+                      <option>Bank of Baroda</option>
+                      <option>Canara Bank</option>
+                      <option>Kotak Mahindra Bank</option>
+                    </select>
+                  </label>
+                </div>
+              ) : null}
+            </div>
           </section>
  
           <aside className="payment-summary">
@@ -866,6 +1373,409 @@ export function PaymentPage({ onNavigate }) {
             </div>
           </aside>
         </div>
+      </section>
+    </main>
+  )
+}
+
+function SupportHeader({ onNavigate }) {
+  const items = [
+    ['Home', 'dashboard'],
+    ['My Rides', 'bookings'],
+    ['Support', 'support'],
+  ]
+
+  return (
+    <header className="support-header">
+      <BrandButton onNavigate={onNavigate} />
+      <nav aria-label="Support navigation">
+        {items.map(([label, page]) => (
+          <button
+            key={label}
+            className={label === 'Support' ? 'is-active' : ''}
+            type="button"
+            onClick={() => onNavigate(page)}
+          >
+            {label}
+          </button>
+        ))}
+      </nav>
+      <div className="support-header-actions">
+        <button className="notification-icon" type="button" onClick={() => onNavigate('notifications')} aria-label="Notifications">
+          <img src={bellIcon} alt="" aria-hidden="true" />
+        </button>
+        <button className="help-icon" type="button" aria-label="Help">?</button>
+        <button className="avatar" type="button" onClick={() => onNavigate('profile')} aria-label="Profile">
+          <img src={profileImg} alt="" aria-hidden="true" />
+        </button>
+      </div>
+    </header>
+  )
+}
+
+function SupportPanelContent({ embedded = false }) {
+  const categories = [
+    {
+      title: 'Ride Issues',
+      text: 'Missing items, driver feedback, or route concerns from your recent travels.',
+      icon: bookingRideIcon,
+      tone: 'orange',
+    },
+    {
+      title: 'Payment & Billing',
+      text: 'Refund requests, invoice downloads, or updating your digital wallet settings.',
+      icon: paymentIcon,
+      tone: 'blue',
+    },
+    {
+      title: 'Safety & Security',
+      text: 'Emergency contacts, health protocols, and identity verification support.',
+      icon: securityIcon,
+      tone: 'red',
+    },
+    {
+      title: 'Technical Support',
+      text: 'Troubleshooting app glitches, map inaccuracies, or account access errors.',
+      icon: methodManageIcon,
+      tone: 'purple',
+    },
+    {
+      title: 'Corporate Solutions',
+      text: 'Business travel management, tax reporting, and multi-user dashboard help.',
+      icon: bankIcon,
+      tone: 'green',
+    },
+    {
+      title: 'Account Privacy',
+      text: 'Data portability, privacy settings, and communication preferences.',
+      icon: priorityIcon,
+      tone: 'yellow',
+    },
+  ]
+
+  const faqs = [
+    'What is the refund policy for cancelled rides?',
+    'How can I schedule a ride for someone else?',
+    'Is my personal data encrypted and secure?',
+  ]
+
+  return (
+    <section className={`support-content ${embedded ? 'is-embedded' : ''}`}>
+      <div className="support-hero">
+        <h1>How can we help <span>James?</span></h1>
+        <form className="support-search" onSubmit={(event) => event.preventDefault()}>
+          <span aria-hidden="true" />
+          <input type="search" placeholder="Search for rides, payments, safety protocols..." />
+          <button type="submit">Search</button>
+        </form>
+      </div>
+
+      <div className="support-category-grid">
+        {categories.map((category) => (
+          <button className="support-category-card" type="button" key={category.title}>
+            <span className={`support-category-icon is-${category.tone}`}>
+              <img src={category.icon} alt="" aria-hidden="true" />
+            </span>
+            <strong>{category.title}</strong>
+            <p>{category.text}</p>
+          </button>
+        ))}
+      </div>
+
+      <section className="support-faq">
+        <div className="support-faq-head">
+          <h2>Frequently Asked Questions</h2>
+          <button type="button">View All <span aria-hidden="true">→</span></button>
+        </div>
+        <div className="support-faq-list">
+          {faqs.map((faq) => (
+            <button type="button" key={faq}>
+              {faq}
+              <span aria-hidden="true">⌄</span>
+            </button>
+          ))}
+        </div>
+      </section>
+    </section>
+  )
+}
+
+export function SupportPage({ onNavigate }) {
+  return (
+    <main className="support-page">
+      <SupportHeader onNavigate={onNavigate} />
+
+      <section className="support-shell">
+        <aside className="support-sidebar">
+          <div className="support-profile-title">
+            <h2>Profile Hub</h2>
+            <p>Professional Traveler</p>
+          </div>
+
+          <nav aria-label="Profile hub">
+            {[
+              { label: 'Personal Info', route: 'profile', icon: 'profile' },
+              { label: 'Payment Methods', route: 'profile-payments', icon: paymentIcon },
+              { label: 'Notifications', route: 'notifications', icon: bellIcon },
+              { label: 'Security', route: 'security', icon: securityIcon },
+            ].map((item) => (
+              <button key={item.label} type="button" onClick={() => onNavigate(item.route)}>
+                {item.icon === 'profile' ? (
+                  <span className="profile-menu-icon is-person" aria-hidden="true" />
+                ) : (
+                  <img src={item.icon} alt="" aria-hidden="true" />
+                )}
+                {item.label}
+              </button>
+            ))}
+          </nav>
+
+          <article className="direct-assistance">
+            <h2>Direct Assistance</h2>
+            <p>Talk to our experts directly for rapid resolution.</p>
+            <button type="button">
+              <span aria-hidden="true">↯</span>
+              Live Chat
+            </button>
+          </article>
+        </aside>
+
+        <SupportPanelContent onNavigate={onNavigate} />
+      </section>
+
+      <button className="support-chat-fab" type="button" aria-label="Open chat" />
+    </main>
+  )
+}
+
+export function ConciergePage({ onNavigate }) {
+  const topNav = [
+    { label: 'Rides', action: () => onNavigate('home') },
+    { label: 'Stays', action: () => onNavigate('service', { service: 'hotels' }) },
+    { label: 'Flights', action: () => onNavigate('service', { service: 'flights' }) },
+    { label: 'Concierge', action: () => onNavigate('concierge'), active: true },
+  ]
+
+  const sidebar = [
+    { label: 'Dashboard', route: 'dashboard', icon: dashboardRideIcon },
+    { label: 'Bookings', route: 'bookings', icon: bookingRideIcon },
+    { label: 'Elite Club', route: 'rewards', icon: goldMemberIcon },
+    { label: 'Concierge', route: 'concierge', icon: priorityIcon, active: true },
+    { label: 'History', route: 'bookings', icon: dashboardCalendarIcon },
+  ]
+
+  const suggestions = [
+    {
+      label: 'Suggest Restaurants',
+      text: 'Top-rated near your arrival',
+      icon: paymentIcon,
+    },
+    {
+      label: 'Leisure Activities',
+      text: 'Exclusive London events today',
+      icon: securityIcon,
+    },
+    {
+      label: 'Express Check-in',
+      text: 'Priority boarding for BA-210',
+      icon: priorityIcon,
+    },
+  ]
+
+  const messages = [
+    {
+      id: 1,
+      type: 'assistant',
+      time: '09:12 AM',
+      text: 'Good morning, Mr. Anderson. I hope you\'re having a productive start to your day. Your flight to London has been confirmed for 3:00 PM. I\'ve also pre-arranged your airport transfer for 12:30 PM.',
+    },
+    {
+      id: 2,
+      type: 'user',
+      time: '09:15 AM',
+      text: 'Excellent work, Sarah. Could you also ensure there\'s a reservation at The Ledbury for 8:00 PM tonight? Preferably a corner table.',
+    },
+    {
+      id: 3,
+      type: 'assistant',
+      time: '09:20 AM',
+      text: 'Consider it done. I\'ve already secured the reservation for you. Your chauffeur, Michael, will be ready at the arrivals hall with your preferred chilled sparkling water and the morning\'s financial journals.',
+    },
+  ]
+
+  return (
+    <main className="concierge-page">
+      <header className="concierge-header">
+        <button className="concierge-brand" type="button" onClick={() => onNavigate('dashboard')} aria-label="JaldiRide home">
+          <img src={logoImage} alt="" aria-hidden="true" />
+          <span>JaldiRide</span>
+        </button>
+
+        <nav className="concierge-top-nav" aria-label="Primary">
+          {topNav.map((item) => (
+            <button
+              key={item.label}
+              className={item.active ? 'is-active' : ''}
+              type="button"
+              onClick={item.action}
+            >
+              {item.label}
+            </button>
+          ))}
+        </nav>
+
+        <div className="concierge-header-actions">
+          <form className="concierge-search" onSubmit={(event) => event.preventDefault()}>
+            <button type="submit" aria-label="Search services">
+              <img src={searchIcon} alt="" aria-hidden="true" />
+            </button>
+            <input type="search" placeholder="Search services..." />
+          </form>
+          <button className="notification-icon" type="button" onClick={() => onNavigate('notifications')} aria-label="Notifications">
+            <img src={bellIcon} alt="" aria-hidden="true" />
+          </button>
+          <button className="help-icon" type="button" onClick={() => onNavigate('support')} aria-label="Help">?</button>
+          <button className="avatar concierge-avatar" type="button" onClick={() => onNavigate('profile')} aria-label="Profile">
+            <img src={profileImg} alt="" aria-hidden="true" />
+          </button>
+        </div>
+      </header>
+
+      <section className="concierge-shell">
+        <aside className="concierge-sidebar">
+          <article className="concierge-profile-card">
+            <span className="concierge-member-label">ELITE MEMBER</span>
+            <h2>Welcome, Executive</h2>
+            <p>JaldiRide Elite Member</p>
+          </article>
+
+          <nav aria-label="Concierge navigation">
+            {sidebar.map((item) => (
+              <button
+                key={item.label}
+                className={item.active ? 'is-active' : ''}
+                type="button"
+                onClick={() => onNavigate(item.route)}
+              >
+                <span className="concierge-menu-icon" aria-hidden="true">
+                  <img src={item.icon} alt="" aria-hidden="true" />
+                </span>
+                {item.label}
+              </button>
+            ))}
+          </nav>
+
+          <article className="concierge-upgrade-card">
+            <span>Upgrade to Platinum</span>
+            <p>Unlock global airport lounge access and private chauffeurs.</p>
+          </article>
+
+          <div className="concierge-sidebar-footer">
+            <button type="button" onClick={() => onNavigate('support')}>Help</button>
+            <button type="button" onClick={() => onNavigate('home')}>Logout</button>
+          </div>
+        </aside>
+
+        <section className="concierge-chat-column">
+          <div className="concierge-chat-header">
+            <div className="concierge-agent">
+              <span className="concierge-agent-avatar">
+                <img src={profileImg} alt="" aria-hidden="true" />
+              </span>
+              <div>
+                <h1>Sarah — Executive Concierge</h1>
+                <p><span className="is-online" />Online</p>
+              </div>
+            </div>
+
+            <div className="concierge-chat-actions">
+              <button type="button" aria-label="Call concierge">⌂</button>
+              <button type="button" aria-label="Video call">▣</button>
+              <button type="button" aria-label="More options">⋮</button>
+            </div>
+          </div>
+
+          <div className="concierge-feed">
+            <span className="concierge-today-pill">TODAY</span>
+
+            {messages.map((message) => (
+              <article key={message.id} className={`concierge-message is-${message.type}`}>
+                <span className="concierge-message-avatar">
+                  <img src={profileImg} alt="" aria-hidden="true" />
+                </span>
+                <div className="concierge-message-body">
+                  <p>{message.text}</p>
+                  <small>{message.time}</small>
+                </div>
+              </article>
+            ))}
+
+            <article className="concierge-media-card">
+              <img src={offerImage} alt="Premium ride preview" />
+              <div>
+                <h2>Airport transfer confirmed</h2>
+                <p>Mercedes-Benz S-Class waiting at arrivals with Michael D.</p>
+              </div>
+            </article>
+          </div>
+
+          <form className="concierge-composer" onSubmit={(event) => event.preventDefault()}>
+            <button type="button" aria-label="Add attachment">+</button>
+            <button type="button" aria-label="Add emoji">☺</button>
+            <input type="text" placeholder="Message your concierge..." />
+            <button type="button" aria-label="Voice input">⌁</button>
+            <button type="submit" aria-label="Send message">→</button>
+          </form>
+        </section>
+
+        <aside className="concierge-right-rail">
+          <article className="concierge-journey-card">
+            <span className="concierge-status-pill">EN ROUTE</span>
+            <img className="concierge-journey-image" src={offerImage} alt="Current journey" />
+            <h2>Mercedes-Benz S-Class</h2>
+            <p className="concierge-journey-meta">Luxus Class • Plate: JLD-001</p>
+
+            <div className="concierge-driver-row">
+              <span className="concierge-driver-avatar">
+                <img src={profileImg} alt="" aria-hidden="true" />
+              </span>
+              <div>
+                <strong>Michael D.</strong>
+                <small>4.9 • Elite Certified</small>
+              </div>
+              <button type="button" aria-label="Call driver">☎</button>
+            </div>
+
+            <div className="concierge-journey-actions">
+              <button type="button">Track Arrival</button>
+              <button type="button">Details</button>
+            </div>
+          </article>
+
+          <section className="concierge-suggestions">
+            <span className="concierge-rail-label">SARAH'S SUGGESTIONS</span>
+            {suggestions.map((suggestion) => (
+              <button key={suggestion.label} className="concierge-suggestion-card" type="button">
+                <span className="concierge-suggestion-icon">
+                  <img src={suggestion.icon} alt="" aria-hidden="true" />
+                </span>
+                <span>
+                  <strong>{suggestion.label}</strong>
+                  <small>{suggestion.text}</small>
+                </span>
+              </button>
+            ))}
+          </section>
+
+          <article className="concierge-priority-card">
+            <span className="concierge-rail-label">CONCIERGE PRIORITY</span>
+            <h2>Sarah is managing 2 other tasks for you.</h2>
+            <div className="concierge-priority-tags">
+              <span>LDN</span>
+              <span>RST</span>
+            </div>
+          </article>
+        </aside>
       </section>
     </main>
   )
@@ -899,7 +1809,7 @@ function ProfileLayout({ active, title, subtitle, children, onNavigate }) {
           <article>
             <h2>Need help?</h2>
             <p>Our support team is available 24/7 for you.</p>
-            <button type="button" onClick={() => onNavigate('notifications')}>Contact Support</button>
+            <button type="button" onClick={() => onNavigate('support')}>Contact Support</button>
           </article>
         </aside>
 
@@ -1026,11 +1936,17 @@ export function MyBookingsPage({ onNavigate }) {
     ['history', 'Past History'],
     ['cancelled', 'Cancelled'],
   ]
+  const bookingsNavItems = [
+    ['Home', 'dashboard'],
+    ['Bookings', 'bookings'],
+    ['Profile', 'profile'],
+    ['Settings', 'security'],
+  ]
   const displayTrips = activeTab === 'upcoming' ? trips : activeTab === 'history' ? pastTrips : cancelledTrips
 
   return (
     <main className="jr-app-page is-bookings">
-      <AppHeader active="Bookings" onNavigate={onNavigate} showSearch={false} />
+      <AppHeader active="Bookings" onNavigate={onNavigate} showSearch={false} navItems={bookingsNavItems} />
       <section className="my-bookings-shell">
         <div className="bookings-head">
           <div><p className="eyebrow">Management Center</p><h1>{activeTab === 'cancelled' ? 'Cancelled Bookings' : 'My Bookings'}</h1><p>{activeTab === 'cancelled' ? 'Review cancelled trips, refund status, and rebook when plans change.' : 'Manage your luxury commutes and historical travel data.'}</p></div>
@@ -1355,7 +2271,7 @@ export function SuccessPage({ onNavigate }) {
             type="button"
             onClick={() => onNavigate("bookings")}
           >
-            Booking History <img src={successTrackIcon} alt="" aria-hidden="true" />
+            Track Journey <img src={successTrackIcon} alt="" aria-hidden="true" />
           </button>
           <button
             className="home-btn"

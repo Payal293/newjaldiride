@@ -9,17 +9,24 @@ import {
   PaymentPage,
   ProfilePage,
   ProfilePaymentsPage,
+  RewardsPage,
   SearchPage,
   SecurityPage,
   ServiceComingSoonPage,
+  SupportPage,
   SuccessPage,
+  ConciergePage,
 } from './pages/AppScreens'
 
 export default function App() {
   const [route, setRoute] = useState({ page: 'home', service: 'hotels' })
 
   const navigate = (page, params = {}) => {
-    setRoute({ page, service: params.service || route.service || 'hotels' })
+    setRoute({
+      page,
+      service: params.service || route.service || 'hotels',
+      tab: params.tab,
+    })
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -48,7 +55,11 @@ export default function App() {
   }
 
   if (route.page === 'bookings') {
-    return <MyBookingsPage onNavigate={navigate} />
+    return <MyBookingsPage onNavigate={navigate} initialTab={route.tab} />
+  }
+
+  if (route.page === 'rewards') {
+    return <RewardsPage onNavigate={navigate} />
   }
 
   if (route.page === 'profile') {
@@ -67,8 +78,16 @@ export default function App() {
     return <SecurityPage onNavigate={navigate} />
   }
 
+  if (route.page === 'support') {
+    return <SupportPage onNavigate={navigate} />
+  }
+
   if (route.page === 'success') {
     return <SuccessPage onNavigate={navigate} />
+  }
+
+  if (route.page === 'concierge') {
+    return <ConciergePage onNavigate={navigate} />
   }
 
   return <Home onNavigate={navigate} />
