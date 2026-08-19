@@ -40,13 +40,15 @@ import cameraIcon from '../assets/driver/camera.svg';
 import facebookIcon from '../assets/driver/facebook.svg';
 import linkedInIcon from '../assets/driver/linked in.svg';
 
-import rideBg from '../assets/image/ride.png';
-import busBg from '../assets/image/bus.jpg';
-import hotelBg from '../assets/image/hotelimg.jpg';
-import flightBg from '../assets/image/flight.jpg';
+import rideBg from '../assets/services/ride.png';
+import busBg from '../assets/services/car.png';
+import hotelBg from '../assets/services/hotel.png';
+import flightBg from '../assets/services/flight.png';
 
 import promoImage from '../assets/image/hero.webp';
 import logoImage from '../assets/image/JALDIRIDE 2.png';
+import footerLogoImage from '../assets/image/jaldiride-logo-mark.svg';
+import phoneLogoImage from '../assets/image/jaldiride-logo-mark-phone.svg';
 import hheroImage from '../assets/image/hhero.png';
 
 
@@ -349,7 +351,7 @@ export default function Home({ onNavigate = () => {}, initialMode = 'ride' }) {
 
             <div className="booking-divider" />
 
-            {activeMode === 'hotels' || activeMode === 'flights' ? (
+            {activeMode === 'flights' ? (
               <div className="coming-soon-container">
                 <div className="coming-soon-content">
                   <SvgIcon 
@@ -378,7 +380,7 @@ export default function Home({ onNavigate = () => {}, initialMode = 'ride' }) {
                   </label>
                 ))}
 
-                <button className="search-button" type="button" onClick={() => onNavigate('search')}>
+                <button className="search-button" type="button" onClick={() => onNavigate(activeMode === 'bus' ? 'search-bus' : activeMode === 'hotels' ? 'search-hotel' : 'search')}>
                   <span>{activeMode === 'bus' ? 'Find Bus' : 'Find Ride'}</span>
                   <span aria-hidden="true">-&gt;</span>
                 </button>
@@ -639,11 +641,7 @@ export default function Home({ onNavigate = () => {}, initialMode = 'ride' }) {
               <div className="phone-mockup">
                 <div className="phone-notch" />
                 <div className="phone-screen">
-                  <div className="phone-bolt-circle">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="white" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </div>
+                  <img className="phone-bolt-circle" src={phoneLogoImage} alt="" aria-hidden="true" />
                   <strong className="phone-app-name">JaldiRide</strong>
                   <small className="phone-app-tagline">Your ride awaits</small>
                 </div>
@@ -657,22 +655,22 @@ export default function Home({ onNavigate = () => {}, initialMode = 'ride' }) {
             <div className="footer-top-grid">
               <article className="footer-brand-col">
                 <div className="footer-brand-row">
-                  <img className="brand-logo" src={logoImage} alt="" aria-hidden="true" />
+                  <img className="brand-logo" src={footerLogoImage} alt="" aria-hidden="true" />
                   <strong>JaldiRide</strong>
                 </div>
-                <p>Making every journey faster, smarter, and more reliable across Pakistan and beyond.</p>
+                <p>Making every journey faster, smarter, and more reliable across India and beyond.</p>
                 <ul className="footer-contact-list">
                   <li>
                     <SvgIcon src={emailIcon} size={14} className="footer-contact-icon" />
-                    <span>hello@jaldiride.com</span>
+                    <a href="mailto:support@jaldirideconnect.com">support@jaldirideconnect.com</a>
                   </li>
                   <li>
                     <SvgIcon src={phoneIcon} size={14} className="footer-contact-icon" />
-                    <span>+92 300 000 0000</span>
+                    <a href="tel:8467002313">8467002313</a>
                   </li>
                   <li>
                     <SvgIcon src={footerLocationIcon} size={14} className="footer-contact-icon" />
-                    <span>Lahore, Pakistan</span>
+                    <span>India</span>
                   </li>
                 </ul>
               </article>

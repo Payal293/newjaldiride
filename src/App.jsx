@@ -10,6 +10,17 @@ import {
   ProfilePage,
   ProfilePaymentsPage,
   RewardsPage,
+  RideDetailsPage,
+  RideResultsPage,
+  BusDetailsPage,
+  BusResultsPage,
+  SearchBusPage,
+  SearchFlightPage,
+  FlightResultsPage,
+  FlightDetailsPage,
+  SearchHotelPage,
+  HotelResultsPage,
+  HotelDetailsPage,
   SearchPage,
   SecurityPage,
   ServiceComingSoonPage,
@@ -44,6 +55,50 @@ export default function App() {
 
   if (route.page === 'search') {
     return <SearchPage onNavigate={navigate} />
+  }
+
+  if (route.page === 'ride-results') {
+    return <RideResultsPage onNavigate={navigate} />
+  }
+
+  if (route.page === 'ride-details') {
+    return <RideDetailsPage onNavigate={navigate} />
+  }
+
+  if (route.page === 'search-bus') {
+    return <SearchBusPage onNavigate={navigate} />
+  }
+
+  if (route.page === 'bus-results') {
+    return <BusResultsPage onNavigate={navigate} />
+  }
+
+  if (route.page === 'bus-details') {
+    return <BusDetailsPage onNavigate={navigate} />
+  }
+
+  if (route.page === 'search-flight') {
+    return <SearchFlightPage onNavigate={navigate} />
+  }
+
+  if (route.page === 'flight-results') {
+    return <FlightResultsPage onNavigate={navigate} />
+  }
+
+  if (route.page === 'flight-details') {
+    return <FlightDetailsPage onNavigate={navigate} />
+  }
+
+  if (route.page === 'search-hotel') {
+    return <SearchHotelPage onNavigate={navigate} />
+  }
+
+  if (route.page === 'hotel-results') {
+    return <HotelResultsPage onNavigate={navigate} />
+  }
+
+  if (route.page === 'hotel-details') {
+    return <HotelDetailsPage onNavigate={navigate} />
   }
 
   if (route.page === 'booking') {
