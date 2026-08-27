@@ -1,0 +1,620 @@
+82: 
+83: function BrandButton({ onNavigate }) {
+84:   return (
+---
+87:   type="button"
+88:   onClick={() => onNavigate("home")}
+89: >
+---
+98: 
+99: function AppHeader({ active = 'Home', onNavigate, showSearch = true, showHelp = false, navItems }) {
+100:   const [searchValue, setSearchValue] = useState('')
+---
+118:       setSearchError('')
+119:       onNavigate('search-bus')
+120:       return
+---
+124:       setSearchError('')
+125:       onNavigate('search-ride')
+126:       return
+---
+130:       setSearchError('')
+131:       onNavigate('search-hotel')
+132:       return
+---
+136:       setSearchError('')
+137:       onNavigate('search-flight')
+138:       return
+---
+145:     <header className="jr-header">
+146:       <BrandButton onNavigate={onNavigate} />
+147:       <nav aria-label="App navigation">
+---
+152:             type="button"
+153:             onClick={() => onNavigate(page)}
+154:           >
+---
+179: 
+180:   <button className="notification-icon" type="button" onClick={() => onNavigate('notifications')} aria-label="Notifications">
+181:   <img src={bellIcon} alt="" aria-hidden="true" />
+---
+185: 
+186:   <button className="avatar" type="button" onClick={() => onNavigate('profile')} aria-label="Profile">
+187:   <img src={profileImg} alt="" aria-hidden="true" />
+---
+250: //   activeStep  – 'search' | 'select' | 'details' | 'payment' | 'confirmation'
+251: //   onNavigate  – navigate function
+252: //   onBack      – optional back handler (defaults to onNavigate('dashboard'))
+---
+251: //   onNavigate  – navigate function
+252: //   onBack      – optional back handler (defaults to onNavigate('dashboard'))
+253: // ─────────────────────────────────────────────────────────────────────────────
+---
+253: // ─────────────────────────────────────────────────────────────────────────────
+254: export function BookingTopBar({ activeStep = 'search', onNavigate, onBack, navItems }) {
+255:   const handleBack = () => {
+---
+256:     if (onBack) return onBack()
+257:     onNavigate('dashboard')
+258:   }
+---
+277:           type="button"
+278:           onClick={() => onNavigate('home')}
+279:         >
+---
+285:           {(navItems || [['Home', 'dashboard'], ['Bookings', 'bookings'], ['Rewards', 'rewards']]).map(([label, page]) => (
+286:             <button key={label} type="button" onClick={() => onNavigate(page)}>{label}</button>
+287:           ))}
+---
+293:             className="booking-topbar-search"
+294:             onClick={() => onNavigate('search')}
+295:             aria-label="Search"
+---
+303:             className="booking-topbar-bell"
+304:             onClick={() => onNavigate('notifications')}
+305:             aria-label="Notifications"
+---
+314:             className="booking-topbar-avatar"
+315:             onClick={() => onNavigate('profile')}
+316:             aria-label="Profile"
+---
+387: 
+388: export function ServiceComingSoonPage({ service = 'hotels', onNavigate }) {
+389:   const current = serviceContent[service] || serviceContent.hotels
+---
+399:       <header className="service-nav">
+400:         <BrandButton onNavigate={onNavigate} />
+401:         <nav aria-label="Service navigation">
+---
+402:           <button className="is-active" type="button">Services</button>
+403:           <button type="button" onClick={() => onNavigate('dashboard')}>App</button>
+404:           <button type="button" onClick={() => onNavigate('search')}>Riders</button>
+---
+403:           <button type="button" onClick={() => onNavigate('dashboard')}>App</button>
+404:           <button type="button" onClick={() => onNavigate('search')}>Riders</button>
+405:         </nav>
+---
+405:         </nav>
+406:         <button className="book-now" type="button" onClick={() => onNavigate('login')}>Book Now</button>
+407:       </header>
+---
+423:                   type="button"
+424:                   onClick={() => (mode.id === 'hotels' ? onNavigate('search-hotel') : mode.id === 'flights' ? onNavigate('search-flight') : mode.id === 'bus' ? onNavigate('search-bus') : onNavigate('home'))}
+425:                 >
+---
+443: 
+444: export function LoginPage({ onNavigate }) {
+445:   return (
+---
+447:       <section className="login-hero">
+448:         <BrandButton onNavigate={onNavigate} />
+449:         <article>
+---
+473:       <section className="login-form-panel">
+474:         <form onSubmit={(event) => { event.preventDefault(); onNavigate('dashboard') }}>
+475:           <h2>Welcome Back</h2>
+---
+516:           </div>
+517:           <p className="create-line">Don't have an account? <button type="button" onClick={() => onNavigate('dashboard')}>Create Account</button></p>
+518:         </form>
+---
+528: 
+529: export function DashboardPage({ onNavigate }) {
+530: const services = [
+---
+556:     <main className="jr-app-page">
+557:       <AppHeader active="Home" onNavigate={onNavigate} />
+558:       <section className="dashboard-shell">
+---
+573:           {services.map(([label, icon]) => (
+574:             <button key={label} type="button" onClick={() => (label === 'Hotels' ? onNavigate('search-hotel') : label === 'Flights' ? onNavigate('search-flight') : label === 'Bus' ? onNavigate('search-bus') : onNavigate('search-ride'))}>
+575:               <img src={icon} alt="" aria-hidden="true" />
+---
+607:                     type="button"
+608:                     onClick={() => onNavigate("booking")}
+609:                   >
+---
+641:               Recent Bookings
+642:               <button type="button" onClick={() => onNavigate('bookings')}>View All</button>
+643:             </h2>
+---
+665:                 onClick={() => {
+666:                   if (label === 'Payment Methods') onNavigate('profile-payments');
+667:                   if (label === 'Security & Privacy') onNavigate('security');
+---
+666:                   if (label === 'Payment Methods') onNavigate('profile-payments');
+667:                   if (label === 'Security & Privacy') onNavigate('security');
+668:                   if (label === 'Priority Support') onNavigate('support');
+---
+667:                   if (label === 'Security & Privacy') onNavigate('security');
+668:                   if (label === 'Priority Support') onNavigate('support');
+669:                 }}
+---
+677:             ))}
+678:             <button className="sign-out" type="button" onClick={() => onNavigate('home')}>Sign Out</button>
+679:           </aside>
+---
+680:         </div>
+681:         <button className="dashboard-fab" type="button" onClick={() => onNavigate('search-ride')} aria-label="Add new booking">
+682:           <img src={plusIcon} alt="" aria-hidden="true" />
+---
+688: 
+689: export function SearchPage({ onNavigate }) {
+690:   const rides = [
+---
+724:     <main className="ride-select-page">
+725:       <BookingTopBar activeStep="select" onNavigate={onNavigate} onBack={() => onNavigate('search-ride')} />
+726: 
+---
+770:                 <strong>{formatMoney(ride.price)}</strong>
+771:                 <button type="button" onClick={() => onNavigate('ride-details')}>Select</button>
+772:               </article>
+---
+848: 
+849: export function RideResultsPage({ onNavigate }) {
+850:   const [activeFilter, setActiveFilter] = useState('Filters')
+---
+936:         activeStep="select"
+937:         onNavigate={onNavigate}
+938:         onBack={() => onNavigate('search-ride')}
+---
+937:         onNavigate={onNavigate}
+938:         onBack={() => onNavigate('search-ride')}
+939:       />
+---
+942:         <BookingFlowSidebar activeStep="select" onStepClick={(step) => {
+943:           if (step === 'search') onNavigate('search-ride')
+944:         }} />
+---
+995:                   type="button"
+996:                   onClick={() => onNavigate(ride.icon === 'bus' ? 'search-bus' : 'ride-details')}
+997:                 >
+---
+1078: 
+1079: export function SearchRidePage({ onNavigate }) {
+1080:   const [passengers, setPassengers] = useState('1 Passenger')
+---
+1084:     <main className="search-ride-page">
+1085:       <BookingTopBar activeStep="search" onNavigate={onNavigate} />
+1086: 
+---
+1109:               event.preventDefault()
+1110:               onNavigate('search')
+1111:             }}
+---
+1225: 
+1226: export function SearchBusPage({ onNavigate }) {
+1227:   const [tripType, setTripType] = useState('one-way')
+---
+1231:     <main className="search-bus-page">
+1232:       <BookingTopBar activeStep="search" onNavigate={onNavigate} />
+1233: 
+---
+1248:             event.preventDefault()
+1249:             onNavigate('bus-results')
+1250:           }}
+---
+1352: 
+1353: export function BusResultsPage({ onNavigate }) {
+1354:   const buses = [
+---
+1390:         activeStep="select"
+1391:         onNavigate={onNavigate}
+1392:         onBack={() => onNavigate('search-bus')}
+---
+1391:         onNavigate={onNavigate}
+1392:         onBack={() => onNavigate('search-bus')}
+1393:       />
+---
+1446:                   <span>{bus.seats}</span>
+1447:                   <button type="button" onClick={() => onNavigate('bus-details')}>View Seats</button>
+1448:                 </div>
+---
+1525: 
+1526: export function BusDetailsPage({ onNavigate }) {
+1527:   const amenities = [
+---
+1535:     <main className="bus-details-page">
+1536:       <BookingTopBar activeStep="details" onNavigate={onNavigate} onBack={() => onNavigate('bus-results')} />
+1537: 
+---
+1605: 
+1606:             <button className="bus-seat-btn" type="button" onClick={() => onNavigate('booking')}>
+1607:               Continue to Seat Selection <BusDetailsIcon name="arrow" />
+---
+1669: 
+1670: export function SearchFlightPage({ onNavigate }) {
+1671:   const [tripType, setTripType] = useState('round-trip')
+---
+1676:     <main className="search-flight-page">
+1677:       <BookingTopBar activeStep="search" onNavigate={onNavigate} />
+1678: 
+---
+1696:               event.preventDefault()
+1697:               onNavigate('flight-results')
+1698:             }}
+---
+1845: 
+1846: export function FlightResultsPage({ onNavigate }) {
+1847:   const flights = [
+---
+1895:         activeStep="select"
+1896:         onNavigate={onNavigate}
+1897:         onBack={() => onNavigate('search-flight')}
+---
+1896:         onNavigate={onNavigate}
+1897:         onBack={() => onNavigate('search-flight')}
+1898:       />
+---
+1911:           </div>
+1912:           <button type="button" onClick={() => onNavigate('search-flight')}>Modify Search</button>
+1913:         </div>
+---
+1955:                 <strong>&#8377;{flight.price}</strong>
+1956:                 <button className={flight.selected ? 'is-selected' : ''} type="button" onClick={() => onNavigate('flight-details')} disabled={flight.disabled}>
+1957:                   Select Flight
+---
+2001: 
+2002: export function FlightDetailsPage({ onNavigate }) {
+2003:   const amenities = [
+---
+2013:     <main className="flight-details-page">
+2014:       <BookingTopBar activeStep="details" onNavigate={onNavigate} onBack={() => onNavigate('flight-results')} />
+2015: 
+---
+2081: 
+2082:             <button className="flight-booking-btn" type="button" onClick={() => onNavigate('payment')}>
+2083:               Continue to Booking
+---
+2153: 
+2154: export function SearchHotelPage({ onNavigate }) {
+2155:   const [guests, setGuests] = useState(2)
+---
+2163:     <main className="search-hotel-page">
+2164:       <BookingTopBar activeStep="search" onNavigate={onNavigate} />
+2165: 
+---
+2181:             event.preventDefault()
+2182:             onNavigate('hotel-results')
+2183:           }}
+---
+2239: 
+2240: export function HotelResultsPage({ onNavigate }) {
+2241:   const hotels = [
+---
+2274:         activeStep="select"
+2275:         onNavigate={onNavigate}
+2276:         onBack={() => onNavigate('search-hotel')}
+---
+2275:         onNavigate={onNavigate}
+2276:         onBack={() => onNavigate('search-hotel')}
+2277:       />
+---
+2321:                   </div>
+2322:                   <button type="button" onClick={() => onNavigate('hotel-details')}>View Hotel</button>
+2323:                 </div>
+---
+2412: 
+2413: export function HotelDetailsPage({ onNavigate }) {
+2414:   const amenities = [
+---
+2422:     <main className="hotel-details-page">
+2423:       <BookingTopBar activeStep="details" onNavigate={onNavigate} onBack={() => onNavigate('hotel-results')} />
+2424: 
+---
+2471: 
+2472:             <button className="hotel-reserve-btn" type="button" onClick={() => onNavigate('booking')}>
+2473:               Reserve Room
+---
+2542: 
+2543: export function RideDetailsPage({ onNavigate }) {
+2544:   const amenities = [
+---
+2552:     <main className="ride-details-page">
+2553:       <BookingTopBar activeStep="details" onNavigate={onNavigate} onBack={() => onNavigate('search')} />
+2554: 
+---
+2625: 
+2626:           <button className="ride-book-btn" type="button" onClick={() => onNavigate('payment')}>
+2627:             Book Ride &rarr;
+---
+2723: 
+2724: export function BookingDetailsPage({ onNavigate }) {
+2725:   return (
+---
+2726:     <main className="jr-app-page booking-stage-page">
+2727:       <BookingTopBar activeStep="details" onNavigate={onNavigate} onBack={() => onNavigate('search')} />
+2728: 
+---
+2785:                 </form>
+2786:                 <button className="payment-cta" type="button" onClick={() => onNavigate('payment')}>Proceed to Payment <span>&#8594;</span></button>
+2787:                 <small className="terms-line">By clicking proceed, you agree to our <a href="#">Terms of Service</a></small>
+---
+3074: 
+3075: function EliteDashboardPanelContent({ onNavigate }) {
+3076:   const services = [
+---
+3113:         {services.map(([label, icon]) => (
+3114:           <button key={label} type="button" onClick={() => (label === 'Hotels' ? onNavigate('search-hotel') : label === 'Flights' ? onNavigate('search-flight') : label === 'Bus' ? onNavigate('search-bus') : onNavigate('search'))}>
+3115:             <img src={icon} alt="" aria-hidden="true" />
+---
+3212: 
+3213: export function RewardsPage({ onNavigate }) {
+3214:   const [activeSection, setActiveSection] = useState('elite-club')
+---
+3225:     if (sectionId === 'concierge') {
+3226:       onNavigate('concierge')
+3227:       return
+---
+3234:     if (activeSection === 'dashboard') {
+3235:       return <EliteDashboardPanelContent onNavigate={onNavigate} />
+3236:     }
+---
+3237:     if (activeSection === 'bookings') {
+3238:       return <BookingsPanelContent onNavigate={onNavigate} initialTab="upcoming" embedded />
+3239:     }
+---
+3240:     if (activeSection === 'history') {
+3241:       return <BookingsPanelContent onNavigate={onNavigate} initialTab="history" embedded />
+3242:     }
+---
+3253:         {/* Logo Unit */}
+3254:         <div className="flex flex-row items-center gap-3 mb-12 pl-1 cursor-pointer" onClick={() => onNavigate('dashboard')}>
+3255:           <div className="flex flex-col">
+---
+3302:           <button 
+3303:             onClick={() => onNavigate('home')}
+3304:             className="flex items-center gap-4 px-5 py-3 text-[14px] font-semibold text-[#64748B] hover:text-[#1E293B] hover:bg-gray-50 rounded-full transition-colors"
+---
+3328:           <div className="flex items-center gap-8">
+3329:             <button onClick={() => onNavigate('notifications')} className="text-[#64748B] hover:text-[#1E293B] transition-colors relative">
+3330:               <BellIconLucide size={22} strokeWidth={2} />
+---
+3335:             
+3336:             <div className="flex items-center gap-4 pl-8 border-l border-gray-200 cursor-pointer" onClick={() => onNavigate('profile')}>
+3337:               <div className="text-right flex flex-col justify-center">
+---
+3354: 
+3355: export function HorizontalBookingFlow({ activeStep = 'search', onStepClick, onNavigate }) {
+3356:   const steps = [
+---
+3372:             type="button"
+3373:             onClick={() => onNavigate('dashboard')}
+3374:             aria-label="Go back"
+---
+3382:             type="button"
+3383:             onClick={() => onNavigate('home')}
+3384:           >
+---
+3429: 
+3430: export function PaymentPage({ onNavigate, service }) {
+3431:   const [activeMethod, setActiveMethod] = useState('card')
+---
+3456:     const prefix = getRoutePrefix()
+3457:     if (step === 'search') onNavigate(`search-${prefix}`)
+3458:     if (step === 'select') onNavigate(`${prefix}-results`)
+---
+3457:     if (step === 'search') onNavigate(`search-${prefix}`)
+3458:     if (step === 'select') onNavigate(`${prefix}-results`)
+3459:     if (step === 'details') onNavigate(`${prefix}-details`)
+---
+3458:     if (step === 'select') onNavigate(`${prefix}-results`)
+3459:     if (step === 'details') onNavigate(`${prefix}-details`)
+3460:   }
+---
+3465:         activeStep="payment" 
+3466:         onNavigate={onNavigate} 
+3467:         onBack={() => onNavigate(`${getRoutePrefix()}-details`)}
+---
+3466:         onNavigate={onNavigate} 
+3467:         onBack={() => onNavigate(`${getRoutePrefix()}-details`)}
+3468:         navItems={[
+---
+3592:               <h2>Total Amount <strong>{formatMoney(842, { decimals: 2 })}</strong></h2>
+3593:               <button type="button" onClick={() => onNavigate('success')}><img src={paymentLockIcon} alt="" aria-hidden="true" />Pay Now</button>
+3594:               <div className="payment-security-row">
+---
+3606: 
+3607: function SupportHeader({ onNavigate }) {
+3608:   const items = [
+---
+3615:     <header className="support-header">
+3616:       <BrandButton onNavigate={onNavigate} />
+3617:       <nav aria-label="Support navigation">
+---
+3622:             type="button"
+3623:             onClick={() => onNavigate(page)}
+3624:           >
+---
+3629:       <div className="support-header-actions">
+3630:         <button className="notification-icon" type="button" onClick={() => onNavigate('notifications')} aria-label="Notifications">
+3631:           <img src={bellIcon} alt="" aria-hidden="true" />
+---
+3633:         <button className="help-icon" type="button" aria-label="Help">?</button>
+3634:         <button className="avatar" type="button" onClick={() => onNavigate('profile')} aria-label="Profile">
+3635:           <img src={profileImg} alt="" aria-hidden="true" />
+---
+3754: 
+3755: export function ConciergePage({ onNavigate }) {
+3756:   const topNav = [
+---
+3756:   const topNav = [
+3757:     { label: 'Rides', action: () => onNavigate('home') },
+3758:     { label: 'Stays', action: () => onNavigate('search-hotel') },
+---
+3757:     { label: 'Rides', action: () => onNavigate('home') },
+3758:     { label: 'Stays', action: () => onNavigate('search-hotel') },
+3759:     { label: 'Flights', action: () => onNavigate('search-flight') },
+---
+3758:     { label: 'Stays', action: () => onNavigate('search-hotel') },
+3759:     { label: 'Flights', action: () => onNavigate('search-flight') },
+3760:     { label: 'Concierge', action: () => onNavigate('concierge'), active: true },
+---
+3759:     { label: 'Flights', action: () => onNavigate('search-flight') },
+3760:     { label: 'Concierge', action: () => onNavigate('concierge'), active: true },
+3761:   ]
+---
+3815:       <header className="concierge-header">
+3816:         <button className="concierge-brand" type="button" onClick={() => onNavigate('dashboard')} aria-label="JaldiRide home">
+3817:           <img src={logoImage} alt="" aria-hidden="true" />
+---
+3840:           </form>
+3841:           <button className="notification-icon" type="button" onClick={() => onNavigate('notifications')} aria-label="Notifications">
+3842:             <ConciergeUiIcon name="bell" />
+---
+3843:           </button>
+3844:           <button className="help-icon" type="button" onClick={() => onNavigate('support')} aria-label="Help">
+3845:             <ConciergeUiIcon name="help" />
+---
+3846:           </button>
+3847:           <button className="avatar concierge-avatar" type="button" onClick={() => onNavigate('profile')} aria-label="Profile">
+3848:             <img src={profileImg} alt="" aria-hidden="true" />
+---
+3866:                 type="button"
+3867:                 onClick={() => onNavigate(item.route)}
+3868:               >
+---
+3877:           <div className="concierge-sidebar-footer">
+3878:             <button type="button" onClick={() => onNavigate('support')}>
+3879:               <span className="concierge-footer-icon is-help" aria-hidden="true"><ConciergeUiIcon name="help" /></span>Help
+---
+3880:             </button>
+3881:             <button type="button" onClick={() => onNavigate('home')}>
+3882:               <span className="concierge-footer-icon is-logout" aria-hidden="true">
+---
+3887: 
+3888:           <article className="concierge-upgrade-card" onClick={() => onNavigate('rewards')} role="button" tabIndex={0} style={{cursor: 'pointer'}}>
+3889:             <span>Upgrade to Platinum</span>
+---
+3978:             <div className="concierge-journey-actions">
+3979:               <button type="button" onClick={() => onNavigate('dashboard')}>Track Arrival</button>
+3980:               <button type="button" onClick={() => onNavigate('bookings')}>Details</button>
+---
+3979:               <button type="button" onClick={() => onNavigate('dashboard')}>Track Arrival</button>
+3980:               <button type="button" onClick={() => onNavigate('bookings')}>Details</button>
+3981:             </div>
+---
+4011: 
+4012: function ProfileLayout({ active, title, subtitle, children, onNavigate, isSupport }) {
+4013:   const menu = [
+---
+4025:     <main className="jr-app-page">
+4026:       <AppHeader {...headerProps} onNavigate={onNavigate} />
+4027:       <section className="profile-shell">
+---
+4036:             {menu.map((item) => (
+4037:               <button key={item.label} className={active === item.label ? 'is-active' : ''} type="button" onClick={() => onNavigate(item.route)}>
+4038:                 {item.icon === 'profile' ? (
+---
+4050:               <p>Talk to our experts directly for rapid resolution.</p>
+4051:               <button type="button" onClick={() => onNavigate('concierge')}>
+4052:                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{marginRight: '6px'}}><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg> Live Chat
+---
+4058:               <p>Our support team is available 24/7 for you.</p>
+4059:               <button type="button" onClick={() => onNavigate('support')}>Contact Support</button>
+4060:             </article>
+---
+4084: 
+4085: export function MyBookingsPage({ onNavigate }) {
+4086:   const [activeTab, setActiveTab] = useState('upcoming')
+---
+4200:     <main className="jr-app-page is-bookings">
+4201:       <AppHeader active="Bookings" onNavigate={onNavigate} showSearch={false} navItems={bookingsNavItems} />
+4202:       <section className="my-bookings-shell">
+---
+4204:           <div><p className="eyebrow">Management Center</p><h1>{activeTab === 'cancelled' ? 'Cancelled Bookings' : 'My Bookings'}</h1><p>{activeTab === 'cancelled' ? 'Review cancelled trips, refund status, and rebook when plans change.' : 'Manage your luxury commutes and historical travel data.'}</p></div>
+4205:           <div><input placeholder="Search trips..." /><button type="button" onClick={() => onNavigate('search')}>+ New Booking</button></div>
+4206:         </div>
+---
+4253:                 <div className="trip-actions-buttons">
+4254:                   <button type="button" onClick={() => (trip.status === 'Cancelled' ? onNavigate('search') : undefined)}>{trip.status === 'Confirmed' || trip.status === 'Scheduled' ? 'Modify' : trip.status === 'Completed' ? 'Rate Trip' : 'Book Again'}</button>
+4255:                   <button type="button" onClick={() => onNavigate('booking')}>{trip.status === 'Confirmed' ? 'Track Live' : trip.status === 'Scheduled' ? 'Edit Route' : trip.status === 'Completed' ? 'View Receipt' : 'Details'}</button>
+---
+4254:                   <button type="button" onClick={() => (trip.status === 'Cancelled' ? onNavigate('search') : undefined)}>{trip.status === 'Confirmed' || trip.status === 'Scheduled' ? 'Modify' : trip.status === 'Completed' ? 'Rate Trip' : 'Book Again'}</button>
+4255:                   <button type="button" onClick={() => onNavigate('booking')}>{trip.status === 'Confirmed' ? 'Track Live' : trip.status === 'Scheduled' ? 'Edit Route' : trip.status === 'Completed' ? 'View Receipt' : 'Details'}</button>
+4256:                 </div>
+---
+4266: 
+4267: export function ProfilePage({ onNavigate }) {
+4268:   return (
+---
+4268:   return (
+4269:     <ProfileLayout active="Personal Info" title="Personal Information" subtitle="Manage your account details and how we contact you." onNavigate={onNavigate}>
+4270:       <div className="profile-form">
+---
+4287:           <p>Your account is protected by 2FA. Last login: 2 hours ago.</p>
+4288:           <button className="is-secure" type="button" onClick={() => onNavigate('security')}>Manage Security <img src={paymentSecureIcon} alt="" aria-hidden="true" /></button>
+4289:         </article>
+---
+4294: 
+4295: export function ProfilePaymentsPage({ onNavigate }) {
+4296:   return (
+---
+4296:   return (
+4297:     <ProfileLayout active="Payment Methods" title="Payment Methods" subtitle="Securely manage your cards, wallets, and bank accounts for faster bookings." onNavigate={onNavigate}>
+4298:       <div className="payment-methods-title-row">
+---
+4388: 
+4389: export function NotificationsPage({ onNavigate }) {
+4390:   return (
+---
+4390:   return (
+4391:     <ProfileLayout active="Notifications" title="Notification Preferences" subtitle="Choose how you want to stay updated with JaldiRide." onNavigate={onNavigate}>
+4392:       <div className="preference-list">
+---
+4412: 
+4413: export function SecurityPage({ onNavigate }) {
+4414:   return (
+---
+4414:   return (
+4415:     <ProfileLayout active="Security" title="Security & Privacy" subtitle="Protect your account and manage your privacy settings." onNavigate={onNavigate}>
+4416:       <div className="security-form">
+---
+4453:           </div>
+4454:           <button type="button" onClick={() => onNavigate('home')}>Logout</button>
+4455:         </div>
+---
+4460: 
+4461: export function SuccessPage({ onNavigate }) {
+4462:   const [copied, setCopied] = useState(false)
+---
+4488:     <main className="success-page booking-stage-page">
+4489:       <HorizontalBookingFlow activeStep="confirmation" onNavigate={onNavigate} />
+4490: 
+---
+4527:               type="button"
+4528:               onClick={() => onNavigate("bookings")}
+4529:             >
+---
+4534:               type="button"
+4535:               onClick={() => onNavigate("dashboard")}
+4536:             >
+---
+4571: 
+4572: export function SupportPage({ onNavigate }) {
+4573:   const categories = [
+---
+4589:     <>
+4590:       <ProfileLayout active="Support" isSupport={true} onNavigate={onNavigate}>
+4591:         <div className="support-content">
+---

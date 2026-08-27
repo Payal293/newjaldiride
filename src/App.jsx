@@ -2,6 +2,9 @@ import { useState } from 'react'
 import Home from './pages/Home'
 import {
   BookingDetailsPage,
+  BusBookingPage,
+  FlightBookingPage,
+  HotelBookingPage,
   DashboardPage,
   LoginPage,
   MyBookingsPage,
@@ -12,6 +15,7 @@ import {
   RewardsPage,
   RideDetailsPage,
   RideResultsPage,
+  SearchRidePage,
   BusDetailsPage,
   BusResultsPage,
   SearchBusPage,
@@ -30,12 +34,18 @@ import {
 } from './pages/AppScreens'
 
 export default function App() {
-  const [route, setRoute] = useState({ page: 'home', service: 'hotels' })
+  const [route, setRoute] = useState({ page: 'home', service: 'ride' })
 
   const navigate = (page, params = {}) => {
+    let detectedService = params.service || route.service || 'ride'
+    if (page.includes('bus')) detectedService = 'bus'
+    else if (page.includes('flight')) detectedService = 'flights'
+    else if (page.includes('hotel')) detectedService = 'hotels'
+    else if (page.includes('ride')) detectedService = 'ride'
+
     setRoute({
       page,
-      service: params.service || route.service || 'hotels',
+      service: detectedService,
       tab: params.tab,
     })
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -55,6 +65,10 @@ export default function App() {
 
   if (route.page === 'search') {
     return <SearchPage onNavigate={navigate} />
+  }
+
+  if (route.page === 'search-ride') {
+    return <SearchRidePage onNavigate={navigate} />
   }
 
   if (route.page === 'ride-results') {
@@ -102,11 +116,14 @@ export default function App() {
   }
 
   if (route.page === 'booking') {
+    if (route.service === 'bus') return <BusBookingPage onNavigate={navigate} />
+    if (route.service === 'flights') return <FlightBookingPage onNavigate={navigate} />
+    if (route.service === 'hotels') return <HotelBookingPage onNavigate={navigate} />
     return <BookingDetailsPage onNavigate={navigate} />
   }
 
   if (route.page === 'payment') {
-    return <PaymentPage onNavigate={navigate} />
+    return <PaymentPage onNavigate={navigate} service={route.service} />
   }
 
   if (route.page === 'bookings') {

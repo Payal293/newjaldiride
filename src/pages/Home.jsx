@@ -380,7 +380,7 @@ export default function Home({ onNavigate = () => {}, initialMode = 'ride' }) {
                   </label>
                 ))}
 
-                <button className="search-button" type="button" onClick={() => onNavigate(activeMode === 'bus' ? 'search-bus' : activeMode === 'hotels' ? 'search-hotel' : 'search')}>
+                <button className="search-button" type="button" onClick={() => onNavigate(activeMode === 'bus' ? 'search-bus' : activeMode === 'hotels' ? 'search-hotel' : 'search-ride')}>
                   <span>{activeMode === 'bus' ? 'Find Bus' : 'Find Ride'}</span>
                   <span aria-hidden="true">-&gt;</span>
                 </button>
